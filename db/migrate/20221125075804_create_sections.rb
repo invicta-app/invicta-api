@@ -1,6 +1,6 @@
 class CreateSections < ActiveRecord::Migration[7.0]
   def change
-    create_table :sections, id: :uuid, default: -> { "uuid_generate_v1mc()" } do |t|
+    create_table :sections, id: :uuid do |t|
       t.belongs_to :volume, type: :uuid, foreign_key: true, null: false
       t.string :section_title, null: true
       t.string :section_type, null: true
