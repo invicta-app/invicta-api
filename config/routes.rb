@@ -1,7 +1,9 @@
 Rails.application.routes.draw do
-  resources :volumes
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
-
-  # Defines the root path route ("/")
-  # root "articles#index"
+  namespace :volumes do
+    namespace :api do
+      namespace :v1 do
+        resources :books
+      end
+    end
+  end
 end

@@ -8,15 +8,8 @@ class VolumesController < ApplicationController
   def show
   end
 
-  def new
-    @volume = Volume.new
-  end
-
-  def edit
-  end
-
-  def create
-    @volume = Volume.new(volume_params)
+  def create_volume_metadata
+    @volume = Volume.create!(create_volume_params)
 
     respond_to do |format|
       if @volume.save
@@ -52,11 +45,21 @@ class VolumesController < ApplicationController
 
   private
 
-    def set_volume
-      @volume = Volume.find(params[:id])
-    end
+  def create_volume_params
+    params.permit(
+      :title,
+      :language,
+      :author,
+      :publisher,
+      :description,
+      :date_published,
+      :rights,
+      :length,
+      :length_unit,
+      identifiers: [],
+      contributors: [],
+      subjects: [],
+    )
+  end
 
-    def volume_params
-      params.fetch(:volume, {})
-    end
 end
