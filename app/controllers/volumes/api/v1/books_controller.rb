@@ -4,19 +4,18 @@ module Volumes
       class BooksController < ApplicationController
         protect_from_forgery with: :null_session
 
-        def index
-          @volumes = Volume.all
-        end
-
-        def show; end
-
         def create
-          # params = create_volume_params
+          volume   = params[:volume]
+          metadata = params[:metadata]
+
+          # Create Book
+          @book = Book.create!(metadata)
+          volume.each { |section| create_section(section, @book.id) }
 
           render json: {
             status:  'SUCCESS',
             message: 'Book loaded successfully.',
-            data:    { random_data: 123, metadata: params[:metadata] }
+            data:    @book
           }, status:   :ok
         end
 
@@ -34,63 +33,17 @@ module Volumes
           end
         end
 
-        def update
-          respond_to do |format|
-            if @volume.update(volume_params)
-              format.html { redirect_to volume_url(@volume), notice: "Volume was successfully updated." }
-              format.json { render :show, status: :ok, location: @volume }
-            else
-              format.html { render :edit, status: :unprocessable_entity }
-              format.json { render json: @volume.errors, status: :unprocessable_entity }
-            end
-          end
-        end
-
         private
 
-        def create_volume_params
-          params
-            .permit(
-              volume:   [
-                          :id,
-                          :body_id,
-                          :body_class,
-                          :length,
-                          :section,
-                          data: [:text, :content_type, :length, :metadata, :sequence]
-                        ],
-              metadata: [
-                          :title,
-                          :language,
-                          :author,
-                          :publisher,
-                          :description,
-                          :date_published,
-                          :rights,
-                          :length,
-                          :length_unit,
-                          identifiers:  [],
-                          contributors: [],
-                          subjects:     [],
-                        ]
-            )
-        end
+        def create_section(section, book_id)
+          contents = section.data
+          section  = section.delete(:data)
 
-        def create_volume_metadata_params
-          params.permit(
-            :title,
-            :language,
-            :author,
-            :publisher,
-            :description,
-            :date_published,
-            :rights,
-            :length,
-            :length_unit,
-            identifiers:  [],
-            contributors: [],
-            subjects:     []
-          )
+          @section = BookSection.save!(section, book_id: book_id)
+
+          contents.each { |content| content.book_section_id = @section.id }
+
+          @contents = BookContent.create!(contents)
         end
       end
     end
