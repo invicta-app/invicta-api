@@ -32,20 +32,6 @@ module Volumes
           }, status:   :ok
         end
 
-        def create_volume_metadata
-          @volume = Volume.create!(create_volume_metadata_params)
-
-          respond_to do |format|
-            if @volume.save
-              format.html { redirect_to volume_url(@volume), notice: "Volume was successfully created." }
-              format.json { render :show, status: :created, location: @volume }
-            else
-              format.html { render :new, status: :unprocessable_entity }
-              format.json { render json: @volume.errors, status: :unprocessable_entity }
-            end
-          end
-        end
-
         private
 
         def create_section(section, book_id)
