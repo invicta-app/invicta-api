@@ -4,13 +4,26 @@ module Volumes
       class BooksController < ApplicationController
         protect_from_forgery with: :null_session
 
+        def show
+          params.permit!
+
+          @book = Book.find(params[:id])
+
+          render json: {
+            status: 'Success',
+            data:   @book
+          }
+        end
+
         def create
+          params.permit!
           volume   = params[:volume]
           metadata = params[:metadata]
 
-          # Create Book
-          @book = Book.create!(metadata)
-          volume.each { |section| create_section(section, @book.id) }
+          ActiveRecord::Base.transaction do
+            @book = Book.create!(metadata)
+            volume.each { |section| create_section(section, @book.id) }
+          end
 
           render json: {
             status:  'SUCCESS',
@@ -36,12 +49,17 @@ module Volumes
         private
 
         def create_section(section, book_id)
-          contents = section.data
-          section  = section.delete(:data)
+          contents           = section.delete('data')
+          section[:length]   = contents.length
+          section[:book_id]  = book_id
+          section[:sequence] = section[:section]
 
-          @section = BookSection.save!(section, book_id: book_id)
+          section.delete :section
+          section.delete :id
 
-          contents.each { |content| content.book_section_id = @section.id }
+          @section = BookSection.create!(section)
+
+          contents.each { |content| content[:book_section_id] = @section.id }
 
           @contents = BookContent.create!(contents)
         end
