@@ -7,8 +7,5 @@ Rails.application.routes.draw do
     end
   end
 
-  namespace :books do
-    resources :content, only: [:index, :show]
-    resources :section, only: [:index, :show]
-  end
+  resources :books
 end
