@@ -39,7 +39,6 @@ module Volumes
           section[:length]   = contents.length
           section[:book_id]  = book_id
           section[:sequence] = section[:section]
-
           section.delete :section
           section.delete :id
 

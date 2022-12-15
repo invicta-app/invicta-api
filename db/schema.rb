@@ -15,11 +15,10 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_12_205603) do
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
 
-  create_table "book_contents", force: :cascade do |t|
+  create_table "book_contents", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "book_section_id", null: false
     t.string "text"
     t.string "content_type", null: false
-    t.integer "length", null: false
     t.integer "sequence", null: false
     t.json "metadata"
     t.datetime "created_at", null: false
