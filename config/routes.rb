@@ -7,5 +7,12 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :books
+  resources :books do
+    resources :sections, only: [:show, :index] do
+      member do
+        get 'next_section'
+        get 'previous_section'
+      end
+    end
+  end
 end

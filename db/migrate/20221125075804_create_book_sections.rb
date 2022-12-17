@@ -5,6 +5,7 @@ class CreateBookSections < ActiveRecord::Migration[7.0]
       t.string :section_title, null: true
       t.integer :sequence, null: true
       t.integer :length, null: false
+      # t.string :section_type, null: false # TODO
 
       t.timestamps
     end

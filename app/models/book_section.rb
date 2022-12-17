@@ -26,4 +26,18 @@ class BookSection < ApplicationRecord
 
   # Validations
   validates :length, presence: true
+
+  def next_section
+    next_section = BookSection.find_by(book_id: self.book_id, sequence: self.sequence + 1)
+    self.errors.add(:section, 'Requested section does not exist.') if next_section.nil?
+    # how do I throw error at model level
+    next_section
+  end
+
+  def previous_section
+    previous_section = BookSection.find_by(book_id: self.book_id, sequence: self.sequence - 1)
+    self.errors.add(:section, 'Requested section does not exist.') if previous_section.nil?
+    # how do I throw error at model level
+    previous_section
+  end
 end
