@@ -40,4 +40,13 @@ class BookSection < ApplicationRecord
     # how do I throw error at model level
     previous_section
   end
+
+  def progress
+    book          = self.book
+    section_count = book.book_sections.count
+    sequence      = self.sequence
+
+    progress = (sequence.to_f / section_count.to_f).round(2) * 100
+    progress.to_int
+  end
 end

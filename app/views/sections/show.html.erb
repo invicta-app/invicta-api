@@ -1,38 +1,31 @@
 <%= render @book %>
 
-<div class="page-container">
-  <h3 class="mb-1"><%= @book.title %></h3>
-  <p class="mb-1 mini-font text-secondary">by <%= @book.author %></p>
-  <p class="mini-font text-secondary">
-    <%= "Section #{@section.sequence}" %><%= ", Paragraph #{params["content"]}" if params["content"] %>
-  </p>
-
-  <div style="
-  width: 50%;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-  ">
-    <% @contents.each do |content| %>
-      <p><%= content.text %></p>
-    <% end %>
-  </div>
-
-  <div class="">
-    <%= button_to 'Previous', { controller: :books, method: :get, section: 123 } %>
-    <%= button_to 'Next', { controller: :books, method: :get, section: 123 } %>
-  </div>
-</div>
-
 <div class="book-page-container">
   <div class="book-page-header">
     <h3 class="mb-1"><%= @book.title %></h3>
-    <p class="mb-1 mini-font text-secondary">by <%= @book.author %></p>
+    <p class="mb-0 mini-font text-secondary">by <%= @book.author %></p>
     <p class="mini-font text-secondary">
       <%= "Section #{@section.sequence}" %><%= ", Paragraph #{params["content"]}" if params["content"] %>
     </p>
   </div>
-  <div class="book-page-body"></div>
-  <div class="book-page-actions"></div>
-  <div class="book-page-footer"></div>
+
+  <div class="book-page-body">
+    <div class="book-page-text-body">
+      <% @contents.each do |content| %>
+        <p><%= content.text %></p>
+        <!--<p><%#= @section.next_section.id %></p>-->
+      <% end %>
+    </div>
+  </div>
+
+  <div class="book-page-actions">
+    <%= button_to 'Prev', { controller: :books, method: :get } %>
+    <%= button_to 'Next', { controller: :books, method: :get } %>
+  </div>
+  <div class="book-page-footer">
+    <div class=""></div>
+    <div class="book-page-progress">
+      <span class="text-secondary"><%= "#{@section.progress}%" %> Complete</span>
+    </div>
+  </div>
 </div>
