@@ -4,6 +4,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 ruby "3.1.3"
 
 gem "sassc-rails", "~> 2.1.2"
+gem "sass-rails"
 gem "rails", "~> 7.0.4"
 gem "sprockets-rails"
 gem "pg"
@@ -16,6 +17,8 @@ gem "tzinfo-data", platforms: %i[ mingw mswin x64_mingw jruby ]
 gem "bootsnap", require: false
 
 gem "bootstrap", "~> 5.1.3"
+gem "jsbundling-rails", "~> 1.1.1"
+gem "cssbundling-rails", "~> 1.1.2"
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
