@@ -1,4 +1,8 @@
 @import "../../../node_modules/bootstrap/scss/bootstrap";
 @import "../../../node_modules/bootstrap-icons/font/bootstrap-icons";
 
-@import 'books/sections/page';
+@import "books/sections/page";
+@import "base/globals";
+
+@import "books/index/index";
+@import "books/index/book-display";

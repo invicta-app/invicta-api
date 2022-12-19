@@ -6,16 +6,10 @@ class SectionsController < ApplicationController
     content     = params[:content]
     end_content = params[:end_content] || params[:content]
 
-    @contents = BookContent.where(book_section_id: @section.id)
-    @contents = @contents.where(sequence: content..end_content) if content.present?
-  end
-
-  def next_section
-    @section = @section.next_section
-  end
-
-  def previous_section
-    @section = @section.previous_section
+    @contents     = BookContent.where(book_section_id: @section.id)
+    @contents     = @contents.where(sequence: content..end_content) if content.present?
+    @next_sectoin = @section.next_section
+    Rails.logger.info("PARAMS: #{params}")
   end
 
   private

@@ -1,0 +1,36 @@
+.book-index-container {
+
+}
+
+.index-books-display-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  align-items: flex-start;
+  width: 100%;
+}
+
+.book-display-container {
+  margin: 1em;
+  padding: 1em;
+
+  display: flex;
+  flex-direction: row;
+  border-radius: 12px;
+}
+
+.book-display-image-container {
+  width: 100px;
+  height: 150px;
+  background-color: blue;
+  margin-right: 1em;
+}
+
+.book-display-info-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: flex-start;
+  width: 90%;
+}

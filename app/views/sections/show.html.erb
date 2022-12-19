@@ -1,31 +1,36 @@
 <%= render @book %>
 
 <div class="book-page-container">
-  <div class="book-page-header">
-    <h3 class="mb-1"><%= @book.title %></h3>
-    <p class="mb-0 mini-font text-secondary">by <%= @book.author %></p>
-    <p class="mini-font text-secondary">
-      <%= "Section #{@section.sequence}" %><%= ", Paragraph #{params["content"]}" if params["content"] %>
-    </p>
+  <div class="book-page-header text-secondary">
+    <p class="mb-0"><%= @book.title %></p>
+    <p class="mb-0"><%= @book.author %></p>
   </div>
 
-  <div class="book-page-body">
+  <div class="book-page-title">
+    <p class="mb-2 pb-1 mini-font text-secondary">
+      <%= "Section #{@section.sequence}" %><%= ", Paragraph #{params["content"]}" if params["content"] %>
+    </p>
+    <h5 class="mb-4">
+      On The Subject Of Matters <%= @section.section_title %>
+    </h5>
+  </div>
+
+  <div class="book-page-body mb-3">
     <div class="book-page-text-body">
-      <% @contents.each do |content| %>
-        <p><%= content.text %></p>
-        <!--<p><%#= @section.next_section.id %></p>-->
-      <% end %>
+      <%= render partial: 'content', collection: @contents %>
     </div>
   </div>
 
   <div class="book-page-actions">
-    <%= button_to 'Prev', { controller: :books, method: :get }, class: 'btn btn-primary' %>
-    <%= button_to 'Next', { controller: :books, method: :get }, class: 'btn btn-primary' %>
-  </div>
-  <div class="book-page-footer">
-    <div class=""></div>
-    <div class="book-page-progress">
-      <span class="text-secondary"><%= "#{@section.progress}%" %> Complete</span>
+    <div class="book-page-actions-left">📚</div>
+    <div class="book-page-actions-middle">
+      <%= link_to '< Prev', book_section_path(@book, @section.previous_section), class: 'btn' %>
+      <%= link_to 'Next >', book_section_path(@book, @section.next_section), class: 'btn' %>
+    </div>
+    <div class="book-page-actions-right">
+      <span class="text-secondary"><%= "#{@section.progress}%" %></span>
     </div>
   </div>
 </div>
+
+

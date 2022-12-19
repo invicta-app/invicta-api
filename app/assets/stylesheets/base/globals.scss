@@ -1,3 +1,16 @@
 .mini-font {
   font-size: 14px;
 }
+
+body {
+  color: $dark;
+}
+
+.bg-grey {
+  background-color: #f0f0f0;
+}
+
+a:-webkit-any-link {
+  text-decoration: none;
+  color: #1a1e21;
+}
