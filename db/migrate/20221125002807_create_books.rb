@@ -11,6 +11,7 @@ class CreateBooks < ActiveRecord::Migration[7.0]
       t.string :rights
       t.string :length_unit, null: true
       t.integer :length, null: true
+      t.integer :content_count, null: false
       t.jsonb :identifiers, null: false
       t.json :contributors, null: true
 

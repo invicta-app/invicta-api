@@ -28,9 +28,11 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_12_205603) do
 
   create_table "book_sections", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "book_id", null: false
+    t.string "ref_id"
     t.string "section_title"
     t.integer "sequence"
-    t.integer "length", null: false
+    t.integer "length"
+    t.string "section_type"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["book_id"], name: "index_book_sections_on_book_id"
@@ -47,6 +49,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_12_205603) do
     t.string "rights"
     t.string "length_unit"
     t.integer "length"
+    t.integer "content_count", null: false
     t.jsonb "identifiers", null: false
     t.json "contributors"
     t.datetime "created_at", null: false

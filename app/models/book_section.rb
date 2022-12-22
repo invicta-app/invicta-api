@@ -3,12 +3,14 @@
 # Table name: book_sections
 #
 #  id            :uuid             not null, primary key
-#  length        :integer          not null
+#  length        :integer
 #  section_title :string
+#  section_type  :string
 #  sequence      :integer
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
 #  book_id       :uuid             not null
+#  ref_id        :string
 #
 # Indexes
 #
@@ -22,7 +24,7 @@ class BookSection < ApplicationRecord
   self.table_name = 'book_sections'
 
   belongs_to :book, class_name: Book.name
-  has_many :book_contents, class_name: BookContent.name
+  has_many :book_contents, class_name: BookContent.name, dependent: :destroy
 
   # Validations
   validates :length, presence: true

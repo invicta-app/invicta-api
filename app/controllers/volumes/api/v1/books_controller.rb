@@ -40,7 +40,6 @@ module Volumes
           section[:book_id]  = book_id
           section[:sequence] = section[:section]
           section.delete :section
-          section.delete :id
 
           @section = BookSection.create!(section)
 
