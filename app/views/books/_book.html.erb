@@ -1,16 +1,16 @@
-<%= link_to book_section_path(book, book.book_sections.first) do %>
+<%= link_to book_section_path(book, book.book_sections.first), class: "book-info-link-container" do %>
   <div class="book-display-container bg-grey">
-    <div class="book-display-image-container"></div>
+    <!--    <div class="book-display-image-container"></div>-->
 
-    <div class="book-display-info-container">
-      <h3 class="mb-0 text-primary"><%= book.title %></h3>
-      <p class="m-0 text-secondary">
+    <div class="book-display-info-container" id="book-info-container">
+      <h4 class="text-primary" style="margin-bottom: 1px"><%= book.title %></h4>
+      <p class="m-0 text-secondary book-display-author-data">
         <%= book.author %><%= " - #{book.date_published.to_date}" if book.date_published.present? %>
       </p>
-      <p class="m-0 fw-bold" style="color: #525252">
+      <p class="m-0 fw-bold book-display-metadata" style="color: #525252">
         1456 Comments - 450 upvotes
       </p>
-      <p class="m-0 text-primary">
+      <p class="m-0 text-primary book-display-description">
         <% if book.description.present? %>
           <%= book.description %>
         <% else %>

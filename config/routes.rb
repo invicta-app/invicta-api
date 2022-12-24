@@ -1,9 +1,10 @@
 Rails.application.routes.draw do
-  namespace :volumes do
-    namespace :api do
-      namespace :v1 do
-        resources :books
-      end
+  devise_for :users
+  root to: 'books#index'
+
+  namespace :api do
+    namespace :v1 do
+      resources :books
     end
   end
 
