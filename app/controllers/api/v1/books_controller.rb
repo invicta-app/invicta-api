@@ -1,52 +1,50 @@
-module Volumes
-  module Api
-    module V1
-      class BooksController < ApplicationController
-        protect_from_forgery with: :null_session
+module Api
+  module V1
+    class BooksController < ApplicationController
+      protect_from_forgery with: :null_session
 
-        def show
-          params.permit!
+      def show
+        params.permit!
 
-          @book = Book.find(params[:id])
+        @book = Book.find(params[:id])
 
-          render json: {
-            status: 'Success',
-            data:   @book
-          }
+        render json: {
+          status: 'Success',
+          data:   @book
+        }
+      end
+
+      def create
+        params.permit!
+        volume   = params[:volume]
+        metadata = params[:metadata]
+
+        ActiveRecord::Base.transaction do
+          @book = Book.create!(metadata)
+          volume.each { |section| create_section(section, @book.id) }
         end
 
-        def create
-          params.permit!
-          volume   = params[:volume]
-          metadata = params[:metadata]
+        render json: {
+          status:  'SUCCESS',
+          message: 'Book loaded successfully.',
+          data:    @book
+        }, status:   :ok
+      end
 
-          ActiveRecord::Base.transaction do
-            @book = Book.create!(metadata)
-            volume.each { |section| create_section(section, @book.id) }
-          end
+      private
 
-          render json: {
-            status:  'SUCCESS',
-            message: 'Book loaded successfully.',
-            data:    @book
-          }, status:   :ok
-        end
+      def create_section(section, book_id)
+        contents           = section.delete('data')
+        section[:length]   = contents.length
+        section[:book_id]  = book_id
+        section[:sequence] = section[:section]
+        section.delete :section
 
-        private
+        @section = BookSection.create!(section)
 
-        def create_section(section, book_id)
-          contents           = section.delete('data')
-          section[:length]   = contents.length
-          section[:book_id]  = book_id
-          section[:sequence] = section[:section]
-          section.delete :section
+        contents.each { |content| content[:book_section_id] = @section.id }
 
-          @section = BookSection.create!(section)
-
-          contents.each { |content| content[:book_section_id] = @section.id }
-
-          @contents = BookContent.create!(contents)
-        end
+        @contents = BookContent.create!(contents)
       end
     end
   end

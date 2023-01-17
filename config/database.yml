@@ -2,18 +2,18 @@ default: &default
   adapter: postgresql
   encoding: unicode
   database: invicta_api
-  username: postgres
-  password: postgres
+  username: invicta
+  password: invicta
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   timeout: 5000
 
 development:
   adapter: postgresql
   encoding: unicode
-  database: invicta_api_development
+  database: invicta_api
   pool: 5
-  username: postgres
-  password: postgres
+  username: invicta
+  password: invicta
   timeout: 5000
 
 # Warning: The database defined as "test" will be erased and
