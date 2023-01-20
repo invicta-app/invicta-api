@@ -3,6 +3,7 @@
 # Table name: book_contents
 #
 #  id              :uuid             not null, primary key
+#  bookmarks       :integer          default(0), not null
 #  content_type    :string           not null
 #  metadata        :json
 #  sequence        :integer          not null
@@ -22,4 +23,5 @@
 class BookContent < ApplicationRecord
   self.table_name = 'book_contents'
   has_one :book_section, class_name: BookSection.name
+  has_one :book, through: :book_section
 end

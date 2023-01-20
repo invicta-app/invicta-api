@@ -24,4 +24,8 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
+
+  ### Associations
+  has_many :user_book_metadatas
+  has_many :books, through: :user_book_metadatas
 end

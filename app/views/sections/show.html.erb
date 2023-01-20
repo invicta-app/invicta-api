@@ -15,7 +15,13 @@
 
   <div class="book-page-body mb-3">
     <div class="book-page-text-body">
-      <%= render partial: 'content', collection: @contents %>
+      <% @contents.each do |content| %>
+        <% if @bookmarks.include?(content.id) %>
+          <%= render partial: 'content', locals: { content: content, bookmarked: true } %>
+        <% else %>
+          <%= render partial: 'content', locals: { content: content, bookmarked: false } %>
+        <% end %>
+      <% end %>
     </div>
   </div>
 

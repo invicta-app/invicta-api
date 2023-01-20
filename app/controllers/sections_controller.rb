@@ -6,10 +6,9 @@ class SectionsController < ApplicationController
     content     = params[:content]
     end_content = params[:end_content] || params[:content]
 
-    @contents     = BookContent.where(book_section_id: @section.id)
-    @contents     = @contents.where(sequence: content..end_content) if content.present?
-    @next_sectoin = @section.next_section
-    Rails.logger.info("PARAMS: #{params}")
+    @contents  = BookContent.where(book_section_id: @section.id)
+    @contents  = @contents.where(sequence: content..end_content) if content.present?
+    @bookmarks = @section.get_bookmarks(current_user)
   end
 
   private

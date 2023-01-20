@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_12_23_225641) do
+ActiveRecord::Schema[7.0].define(version: 2023_01_20_001554) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -23,6 +23,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_23_225641) do
     t.json "metadata"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "bookmarks", default: 0, null: false
     t.index ["book_section_id"], name: "index_book_contents_on_book_section_id"
   end
 
@@ -56,6 +57,18 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_23_225641) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "user_book_metadata", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "book_id", null: false
+    t.uuid "user_id", null: false
+    t.uuid "current_section_id"
+    t.string "content_bookmarks", default: [], null: false, array: true
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["book_id"], name: "index_user_book_metadata_on_book_id"
+    t.index ["current_section_id"], name: "index_user_book_metadata_on_current_section_id"
+    t.index ["user_id"], name: "index_user_book_metadata_on_user_id"
+  end
+
   create_table "users", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -73,4 +86,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_23_225641) do
 
   add_foreign_key "book_contents", "book_sections"
   add_foreign_key "book_sections", "books"
+  add_foreign_key "user_book_metadata", "book_sections", column: "current_section_id"
+  add_foreign_key "user_book_metadata", "books"
+  add_foreign_key "user_book_metadata", "users"
 end

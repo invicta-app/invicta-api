@@ -1,5 +1,12 @@
 <div class="book-page-text-content">
-  <p>
-    <%= content.text %>
-  </p>
+  <%# if bookmarked %>
+  <i class="fa-regular fa-bookmark"></i>
+
+  <% if content.content_type == 'p' %>
+    <p><%= content.text %></p>
+  <% elsif content.content_type == 'blockquote' %>
+    <blockquote><%= content.text %></blockquote>
+  <% else %>
+    <p><%= content.text %></p>
+  <% end %>
 </div>

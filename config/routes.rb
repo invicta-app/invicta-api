@@ -19,4 +19,9 @@ Rails.application.routes.draw do
       end
     end
   end
+
+  resources :contents, only: :update do
+    put 'add_bookmark'
+    put 'remove_bookmark'
+  end
 end

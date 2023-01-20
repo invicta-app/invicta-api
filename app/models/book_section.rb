@@ -29,6 +29,7 @@ class BookSection < ApplicationRecord
   # Validations
   validates :length, presence: true
 
+  ### Class Methods
   def next_section
     next_section = BookSection.find_by(book_id: self.book_id, sequence: self.sequence + 1)
     self.errors.add(:section, 'Requested section does not exist.') if next_section.nil?
@@ -50,5 +51,12 @@ class BookSection < ApplicationRecord
 
     progress = (sequence.to_f / section_count.to_f).round(2) * 100
     progress.to_int
+  end
+
+  def get_bookmarks(user)
+    metadata = user.user_book_metadatas.find_by(book: self.book)
+    return [] unless metadata
+
+    metadata.content_bookmarks
   end
 end
