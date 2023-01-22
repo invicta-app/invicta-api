@@ -8,19 +8,15 @@
     <p class="mb-2 pb-1 mini-font text-secondary">
       <%= "Section #{@section.sequence}" %><%= ", Paragraph #{params["content"]}" if params["content"] %>
     </p>
-    <h5 class="mb-3">
-      On The Subject Of Matters <%= @section.section_title %>
-    </h5>
+    <!--    <h5 class="mb-3">-->
+    <!--      On The Subject Of Matters <%#= @section.section_title %>-->
+    <!--    </h5>-->
   </div>
 
   <div class="book-page-body mb-3">
     <div class="book-page-text-body">
       <% @contents.each do |content| %>
-        <% if @bookmarks.include?(content.id) %>
-          <%= render partial: 'content', locals: { content: content, bookmarked: true } %>
-        <% else %>
-          <%= render partial: 'content', locals: { content: content, bookmarked: false } %>
-        <% end %>
+        <%= render partial: 'content', locals: { content: content } %>
       <% end %>
     </div>
   </div>
@@ -28,8 +24,8 @@
   <div class="book-page-actions">
     <div class="book-page-actions-left">📚</div>
     <div class="book-page-actions-middle">
-      <%= link_to '< Prev', book_section_path(@book, @section.previous_section), class: 'btn' %>
-      <%= link_to 'Next >', book_section_path(@book, @section.next_section), class: 'btn' %>
+      <%= link_to '< Prev', book_section_path(@book, @section.previous_section), class: 'btn btn-secondary book-page-actions-prev-btn' %>
+      <%= link_to 'Next >', book_section_path(@book, @section.next_section), class: 'btn btn-secondary book-page-actions-next-btn' %>
     </div>
     <div class="book-page-actions-right">
       <span class="text-secondary"><%= "#{@section.progress}%" %></span>

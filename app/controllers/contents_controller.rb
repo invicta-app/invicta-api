@@ -1,24 +1,45 @@
 class ContentsController < ApplicationController
-  before_action :get_metadata
-  before_action :authenticate_user!, only: [:add_bookmark, :remove_bookmark]
+  before_action :get_metadata, :authenticate_user!
+
+  def handle_bookmark
+    if @metadata.content_bookmarks.include?(@content.id)
+      remove_bookmark
+      bookmarked = false
+    else
+      add_bookmark
+      bookmarked = true
+    end
+
+    render turbo_stream:
+             turbo_stream.replace(
+               @content.id,
+               partial: "sections/bookmark",
+               locals:  {
+                 content:    @content,
+                 bookmarked: bookmarked,
+               }
+             )
+  end
+
+  private
 
   def add_bookmark
     @content.bookmarks += 1
     @content.save!
-    @metadata.add_bookmark(@content.id)
+    @book.bookmark_count += 1
+    @book.save!
 
-    head :ok, status: 201
+    @metadata.add_bookmark(@content.id)
   end
 
   def remove_bookmark
     @content.bookmarks -= 1
     @content.save!
+    @book.bookmark_count -= 1
+    @book.save!
+
     @metadata.remove_bookmark(@content.id)
-
-    head :ok, status: 201
   end
-
-  private
 
   def get_metadata
     @user     = current_user

@@ -4,6 +4,7 @@
 #
 #  id             :uuid             not null, primary key
 #  author         :string
+#  bookmark_count :integer          default(0), not null
 #  content_count  :integer          not null
 #  contributors   :json
 #  date_published :string

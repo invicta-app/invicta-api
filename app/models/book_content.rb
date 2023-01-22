@@ -3,7 +3,7 @@
 # Table name: book_contents
 #
 #  id              :uuid             not null, primary key
-#  bookmarks       :integer          default(0), not null
+#  bookmark_count  :integer          default(0), not null
 #  content_type    :string           not null
 #  metadata        :json
 #  sequence        :integer          not null

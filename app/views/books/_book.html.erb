@@ -1,12 +1,12 @@
-<%= link_to book_section_path(book, book.get_user_section(current_user)), class: "book-info-link-container" do %>
-  <div class="book-display-container bg-grey">
+<%= link_to book_section_path(book, book.get_user_section(current_user)), class: "book-info-link-container text-secondary text-decoration-none" do %>
+  <div class="book-display-container bg-dark">
     <div class="book-display-info-container" id="book-info-container">
       <h4 class="text-primary" style="margin-bottom: 1px"><%= book.title %></h4>
       <p class="m-0 text-secondary book-display-author-data">
         <%= book.author %><%= " - #{book.date_published.to_date}" if book.date_published.present? %>
       </p>
       <p class="m-0 fw-bold book-display-metadata" style="color: #525252">
-        1456 Comments - 450 upvotes
+        <%= book.bookmark_count %> Bookmarks - 450 Comments
       </p>
       <p class="m-0 text-primary book-display-description">
         <% if book.description.present? %>
@@ -15,15 +15,15 @@
           <i>No book description provided.</i>
         <% end %>
       </p>
-      <div class="progress" style="width: 100%; height: 5px;">
-        <div
-          class="progress-bar"
-          role="progressbar"
-          aria-valuenow="<%= 30 %>"
-          aria-valuemin="<%= 0 %>"
-          aria-valuemax="<%= 100 %> %>"
-        ></div>
-      </div>
+      <!--      <div class="progress" style="width: 100%; height: 5px;">-->
+      <!--        <div-->
+      <!--          class="progress-bar"-->
+      <!--          role="progressbar"-->
+      <!--          aria-valuenow="<%#= %>"-->
+      <!--          aria-valuemin="<%#= 0 %>"-->
+      <!--          aria-valuemax="<%#= 100 %> %>"-->
+      <!--        ></div>-->
+      <!--      </div>-->
     </div>
   </div>
 <% end %>

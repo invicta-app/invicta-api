@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg">
+<nav class="navbar navbar-expand-lg text-secondary">
   <div class="container-fluid">
     <a class="navbar-brand ms-2 navbar-header-invicta" href="/">Invicta 📗</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -10,7 +10,7 @@
         <!--          <a class="nav-link" href="#">Link</a>-->
         <!--        </li>-->
       </ul>
-      <ul class="navbar-nav navbar-options-invicta">
+      <ul class="navbar-nav navbar-options-invicta text-secondary">
         <% if current_user %>
           <li class="nav-item"> <%= link_to "Edit Account", edit_user_registration_path, class: "nav-link" %></li>
           <li class="nav-item"> <%= button_to "Sign Out", destroy_user_session_path, method: :delete, class: "btn btn-small btn-primary mx-2" %></li>

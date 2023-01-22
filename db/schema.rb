@@ -23,7 +23,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_20_001554) do
     t.json "metadata"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "bookmarks", default: 0, null: false
+    t.integer "bookmark_count", default: 0, null: false
     t.index ["book_section_id"], name: "index_book_contents_on_book_section_id"
   end
 
@@ -55,6 +55,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_20_001554) do
     t.json "contributors"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "bookmark_count", default: 0, null: false
   end
 
   create_table "user_book_metadata", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|

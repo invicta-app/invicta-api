@@ -20,8 +20,7 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :contents, only: :update do
-    get 'add_bookmark'
-    get 'remove_bookmark'
+  resources :contents, only: :show do
+    get 'handle_bookmark'
   end
 end
