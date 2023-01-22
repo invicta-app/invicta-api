@@ -2,7 +2,10 @@ class SectionsController < ApplicationController
   before_action :fetch_book, :fetch_section
 
   def show
-    params      = show_params
+    params = show_params
+    find_or_create_metadata
+    assign_current_section
+
     content     = params[:content]
     end_content = params[:end_content] || params[:content]
 
@@ -25,4 +28,23 @@ class SectionsController < ApplicationController
   def fetch_section
     @section = BookSection.find_by(id: params[:id], book_id: params[:book_id])
   end
+
+  def find_or_create_metadata
+    metadata = UserBookMetadata.find_by(user: current_user, book: @book)
+
+    if metadata.blank?
+      UserBookMetadata.create!(
+        book:               @book,
+        user:               current_user,
+        current_section_id: @section.id
+      )
+    end
+
+    @metadata = metadata
+  end
+
+  def assign_current_section
+    @metadata.update!(current_section_id: show_params[:id])
+  end
+
 end

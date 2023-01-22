@@ -52,21 +52,6 @@ $breakpoint-laptop: 1024px;
 .book-page-text-body {
 }
 
-.book-page-text-content {
-  border-radius: 10px;
-  padding: 0.5em 0.8em 0.6em 0.8em;
-  transition: 0.15s;
-
-  &:hover {
-    background-color: #f0f0f0;
-    cursor: pointer;
-  }
-
-  p {
-    margin-bottom: 0;
-  }
-}
-
 .book-page-actions {
   display: flex;
   flex-direction: row;

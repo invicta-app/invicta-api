@@ -1,5 +1,6 @@
 class ContentsController < ApplicationController
   before_action :get_metadata
+  before_action :authenticate_user!, only: [:add_bookmark, :remove_bookmark]
 
   def add_bookmark
     @content.bookmarks += 1
@@ -21,7 +22,7 @@ class ContentsController < ApplicationController
 
   def get_metadata
     @user     = current_user
-    @content  = BookContent.find(params[:id])
+    @content = BookContent.find(params[:content_id])
     @section  = BookSection.find(@content.book_section_id)
     @book     = Book.find(@section.book_id)
     @metadata = UserBookMetadata.find_by(book: @book, user: @user)

@@ -29,18 +29,16 @@ class BookSection < ApplicationRecord
   # Validations
   validates :length, presence: true
 
-  ### Class Methods
+  ### Instance Methods
   def next_section
     next_section = BookSection.find_by(book_id: self.book_id, sequence: self.sequence + 1)
-    self.errors.add(:section, 'Requested section does not exist.') if next_section.nil?
-    # how do I throw error at model level
+    return self if next_section.nil?
     next_section
   end
 
   def previous_section
     previous_section = BookSection.find_by(book_id: self.book_id, sequence: self.sequence - 1)
-    self.errors.add(:section, 'Requested section does not exist.') if previous_section.nil?
-    # how do I throw error at model level
+    return self if previous_section.nil?
     previous_section
   end
 
@@ -59,4 +57,6 @@ class BookSection < ApplicationRecord
 
     metadata.content_bookmarks
   end
+
+  # TODO - delete section method
 end

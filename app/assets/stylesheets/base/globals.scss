@@ -1,9 +1,14 @@
+$invicta-dark: #2c3034;
+$invicta-text: #d9d9d9;
+$invicta-x: #1e1e1e;
+
 .mini-font {
   font-size: 14px;
 }
 
 body {
-  color: $dark;
+  background-color: $invicta-dark;
+  color: $invicta-text;
 }
 
 .bg-grey {
@@ -15,3 +20,10 @@ a:-webkit-any-link a:link a:visited {
   color: #1a1e21 !important;
 }
 
+html {
+  box-sizing: border-box;
+}
+
+*, *:before, *:after {
+  box-sizing: inherit;
+}

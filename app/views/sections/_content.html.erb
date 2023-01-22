@@ -1,12 +1,31 @@
-<div class="book-page-text-content">
+<div class="book-page-content-container">
   <%# if bookmarked %>
-  <i class="fa-regular fa-bookmark"></i>
 
-  <% if content.content_type == 'p' %>
-    <p><%= content.text %></p>
-  <% elsif content.content_type == 'blockquote' %>
-    <blockquote><%= content.text %></blockquote>
-  <% else %>
-    <p><%= content.text %></p>
+  <%= link_to content_add_bookmark_path(content), remote: true, method: :get do %>
+    <div class="book-content-bookmark-container text-secondary">
+      <div class="book-content-bookmark-wrapper">
+        <i class="fa-regular fa-bookmark fa-lg"></i>
+      </div>
+    </div>
   <% end %>
+
+  <div class="book-content-text-container">
+    <% if content.content_type == 'p' %>
+      <p><%= content.text %></p>
+    <% elsif content.content_type == 'blockquote' %>
+      <blockquote><%= content.text %></blockquote>
+    <% else %>
+      <p><%= content.text %></p>
+    <% end %>
+  </div>
+
+  <div class="book-content-actions-container text-secondary">
+
+    <div>
+      <i class="fa-regular fa-message fa-lg"></i>
+    </div>
+    <div>
+      <i class="fa-solid fa-ellipsis fa-lg"></i>
+    </div>
+  </div>
 </div>

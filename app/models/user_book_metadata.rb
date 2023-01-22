@@ -23,8 +23,8 @@
 #  fk_rails_...  (user_id => users.id)
 #
 class UserBookMetadata < ApplicationRecord
-  has_one :user
-  has_one :book
+  belongs_to :user
+  belongs_to :book
 
   ### Class Methods
   def add_bookmark(content_id)
