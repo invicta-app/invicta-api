@@ -1,8 +1,9 @@
 class SectionsController < ApplicationController
-  before_action :fetch_book, :fetch_section
+  before_action :fetch_book, :fetch_section, :authenticate_user!
 
   def show
     params = show_params
+
     find_or_create_metadata
     assign_current_section
 
@@ -11,7 +12,7 @@ class SectionsController < ApplicationController
 
     @contents  = BookContent.where(book_section_id: @section.id)
     @contents  = @contents.where(sequence: content..end_content) if content.present?
-    @bookmarks = @section.get_bookmarks(current_user)
+    @bookmarks = @section.get_bookmarks(current_user) if current_user
   end
 
   private
@@ -39,7 +40,6 @@ class SectionsController < ApplicationController
         current_section_id: @section.id
       )
     end
-
     @metadata = metadata
   end
 

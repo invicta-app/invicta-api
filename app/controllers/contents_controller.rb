@@ -24,7 +24,7 @@ class ContentsController < ApplicationController
   private
 
   def add_bookmark
-    @content.bookmarks += 1
+    @content.bookmark_count += 1
     @content.save!
     @book.bookmark_count += 1
     @book.save!
@@ -33,7 +33,7 @@ class ContentsController < ApplicationController
   end
 
   def remove_bookmark
-    @content.bookmarks -= 1
+    @content.bookmark_count -= 1
     @content.save!
     @book.bookmark_count -= 1
     @book.save!

@@ -31,11 +31,11 @@ class Book < ApplicationRecord
   validates :title, presence: true
 
   ### Instance Methods
-  def get_user_section(user)
-    metadata = user.user_book_metadatas.find_by(book: self)
+  def get_current_section(user = nil)
+    metadata = user&.user_book_metadatas&.find_by(book: self)
 
     if metadata.blank?
-      Book.get_first_section!(self)
+      Book.get_first_section(self)
     else
       BookSection.find(metadata.current_section_id)
     end
@@ -51,8 +51,8 @@ class Book < ApplicationRecord
 
   ### Class Methods
   class << self
-    def get_first_section!(book)
-      BookSection.find_by!(book: book, sequence: 0)
+    def get_first_section(book)
+      BookSection.find_by(book: book, sequence: 0)
     end
   end
 end

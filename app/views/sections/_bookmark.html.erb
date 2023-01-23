@@ -1,12 +1,17 @@
 <%= turbo_frame_tag content.id do %>
-  <div class="book-content-bookmark-wrapper <%= bookmarked && "bookmarked" %> text-secondary">
-    <% if bookmarked %>
-      <i class="fa-solid fa-bookmark fa-lg"></i>
-    <% else %>
-      <i class="fa-regular fa-bookmark fa-lg"></i>
+  <div class="book-content-bookmark-container">
+    <div class="bookmark-wrapper <%= bookmarked && "bookmarked" %> text-secondary">
+      <% if bookmarked %>
+        <i class="fa-solid fa-bookmark fa-lg"></i>
+      <% else %>
+        <i class="fa-regular fa-bookmark fa-lg"></i>
+      <% end %>
+    </div>
+
+    <% unless content.bookmark_count == 0 %>
+      <div class="bookmark-count-wrapper text-secondary">
+        <span><%= content.bookmark_count %></span>
+      </div>
     <% end %>
   </div>
-  <p>
-    <%= content.bookmarks %>
-  </p>
 <% end %>

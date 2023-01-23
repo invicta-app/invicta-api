@@ -22,12 +22,12 @@
   </div>
 
   <div class="book-page-actions">
-    <div class="book-page-actions-left">📚</div>
-    <div class="book-page-actions-middle">
-      <%= link_to '< Prev', book_section_path(@book, @section.previous_section), class: 'btn btn-secondary book-page-actions-prev-btn' %>
-      <%= link_to 'Next >', book_section_path(@book, @section.next_section), class: 'btn btn-secondary book-page-actions-next-btn' %>
+    <div class="left">📚</div>
+    <div class="middle">
+      <%= link_to '< Prev', book_section_path(@book, @section.previous_section), class: 'btn btn-outline-secondary prev-btn' %>
+      <%= link_to 'Next >', book_section_path(@book, @section.next_section), class: 'btn btn-outline-secondary next-btn' %>
     </div>
-    <div class="book-page-actions-right">
+    <div class="right">
       <span class="text-secondary"><%= "#{@section.progress}%" %></span>
     </div>
   </div>

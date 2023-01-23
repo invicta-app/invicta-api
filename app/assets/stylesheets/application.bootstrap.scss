@@ -3,12 +3,9 @@
 @import "font-awesome";
 
 @import "base/globals";
-
 @import "navbar/index";
-
-@import "books/sections/page";
 @import "books/index/index";
 @import "books/index/book";
-@import "books/contents/index";
-
+@import "sections/show";
+@import "sections/contents";
 @import "registration/sign-up";

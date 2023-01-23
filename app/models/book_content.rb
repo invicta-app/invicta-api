@@ -4,6 +4,7 @@
 #
 #  id              :uuid             not null, primary key
 #  bookmark_count  :integer          default(0), not null
+#  comment_count   :integer          default(0), not null
 #  content_type    :string           not null
 #  metadata        :json
 #  sequence        :integer          not null

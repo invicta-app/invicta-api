@@ -58,28 +58,30 @@ $breakpoint-laptop: 1024px;
   justify-content: space-between;
   align-items: center;
   width: 100%;
+
+
+  .left {
+    font-size: 24px;
+    width: 25px;
+  }
+
+  .middle {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .right {
+    width: 25px;
+  }
+
+  .prev-btn {
+    margin: 0 10px;
+  }
+
+  .next-btn {
+    margin: 0 10px;
+  }
 }
 
-.book-page-actions-left {
-  font-size: 24px;
-  width: 25px;
-}
-
-.book-page-actions-middle {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.book-page-actions-right {
-  width: 25px;
-}
-
-.book-page-actions-prev-btn {
-  margin: 0 10px;
-}
-
-.book-page-actions-next-btn {
-  margin: 0 10px;
-}
