@@ -16,6 +16,9 @@ gem "jbuilder"
 gem "tzinfo-data", platforms: %i[ mingw mswin x64_mingw jruby ]
 gem "bootsnap", require: false
 
+# Javascript
+gem "popper_js", "~> 2.11"
+
 # CSS
 gem "bootstrap", "~> 5.1.3"
 gem "jsbundling-rails", "~> 1.1.1"

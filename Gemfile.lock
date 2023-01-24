@@ -120,6 +120,7 @@ GEM
     jbuilder (2.11.5)
       actionview (>= 5.0.0)
       activesupport (>= 5.0.0)
+    jquery (0.0.1)
     jsbundling-rails (1.1.1)
       railties (>= 6.0.0)
     loofah (2.19.0)
@@ -255,8 +256,10 @@ DEPENDENCIES
   font-awesome-sass (~> 6.2.1)
   importmap-rails
   jbuilder
+  jquery (~> 0.0.1)
   jsbundling-rails (~> 1.1.1)
   pg
+  popper_js (~> 2.11)
   puma (~> 5.0)
   rails (~> 7.0.4)
   sass-rails

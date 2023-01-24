@@ -12,17 +12,21 @@
 
   p {
     margin-bottom: 0;
+  }
+
+  .text-link-container {
     flex-grow: 100;
   }
 
   blockquote { margin-bottom: 0 }
 
-  .book-content-text-container { flex-grow: 100 }
+  .book-content-text-container {
+    flex-grow: 100;
+    color: $invicta-text !important;
+  }
 }
 
 .book-content-bookmark-container {
-  flex-grow: 100;
-
   .bookmark-wrapper {
     padding: 0 1.4em;
     height: 100%;
@@ -43,18 +47,4 @@
   }
 
   .bookmarked { color: $orange !important }
-}
-
-.book-content-actions-container {
-  padding: 0 1.2em;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  color: $invicta-dark-grey;
-
-  &:hover { color: deepskyblue !important }
-
-  .messaged { color: deepskyblue !important }
 }

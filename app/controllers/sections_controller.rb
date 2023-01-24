@@ -1,5 +1,6 @@
 class SectionsController < ApplicationController
-  before_action :fetch_book, :fetch_section, :authenticate_user!
+  before_action :authenticate_user!, only: [:show]
+  before_action :fetch_book, :fetch_section
 
   def show
     params = show_params
@@ -28,10 +29,11 @@ class SectionsController < ApplicationController
 
   def fetch_section
     @section = BookSection.find_by(id: params[:id], book_id: params[:book_id])
+    Rails.logger.info("HELLOE BITCH #{params}")
   end
 
   def find_or_create_metadata
-    metadata = UserBookMetadata.find_by(user: current_user, book: @book)
+    metadata  = UserBookMetadata.find_by(user: current_user, book: @book)
 
     if metadata.blank?
       UserBookMetadata.create!(

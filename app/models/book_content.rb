@@ -25,6 +25,7 @@ class BookContent < ApplicationRecord
   self.table_name = 'book_contents'
   has_one :book_section, class_name: BookSection.name
   has_one :book, through: :book_section
+  has_many :comments, class_name: Comment.name
 
   # TODO - delete content method
 end

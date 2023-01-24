@@ -1,36 +1,44 @@
-<div class="book-page-container">
-  <div class="book-page-header text-secondary">
-    <p class="mb-0"><%= @book.title %></p>
-    <p class="mb-0"><%= @book.author %></p>
-  </div>
+<div class="section-show">
+  <%= render partial: 'table_of_contents',
+             locals:  {
+               current_section: @section,
+               sections:        @book.book_sections } %>
 
-  <div class="book-page-title">
-    <p class="mb-2 pb-1 mini-font text-secondary">
-      <%= "Section #{@section.sequence}" %><%= ", Paragraph #{params["content"]}" if params["content"] %>
-    </p>
-    <!--    <h5 class="mb-3">-->
-    <!--      On The Subject Of Matters <%#= @section.section_title %>-->
-    <!--    </h5>-->
-  </div>
-
-  <div class="book-page-body mb-3">
-    <div class="book-page-text-body">
-      <% @contents.each do |content| %>
-        <%= render partial: 'content', locals: { content: content } %>
-      <% end %>
+  <div class="book-page toc-enabled toc-disabled">
+    <div class="toc-icon-container">
+      <i class="fa-solid fa-chevrons-right"></i>
     </div>
-  </div>
-
-  <div class="book-page-actions">
-    <div class="left">📚</div>
-    <div class="middle">
-      <%= link_to '< Prev', book_section_path(@book, @section.previous_section), class: 'btn btn-outline-secondary prev-btn' %>
-      <%= link_to 'Next >', book_section_path(@book, @section.next_section), class: 'btn btn-outline-secondary next-btn' %>
+    <div class="book-page-header text-secondary">
+      <p class="mb-0"><%= @book.title %></p>
+      <p class="mb-0"><%= @book.author %></p>
     </div>
-    <div class="right">
-      <span class="text-secondary"><%= "#{@section.progress}%" %></span>
+
+    <div class="book-page-title">
+      <p class="mb-2 pb-1 mini-font text-secondary">
+        <%= "Section #{@section.sequence}" %><%= ", Paragraph #{params["content"]}" if params["content"] %>
+      </p>
+      <!--    <h5 class="mb-3">-->
+      <!--      On The Subject Of Matters <%#= @section.section_title %>-->
+      <!--    </h5>-->
+    </div>
+
+    <div class="book-page-body mb-3">
+      <div class="book-page-text-body">
+        <% @contents.each do |content| %>
+          <%= render partial: 'content', locals: { content: content } %>
+        <% end %>
+      </div>
+    </div>
+
+    <div class="book-page-actions">
+      <div class="left">📚</div>
+      <div class="middle">
+        <%= link_to '< Prev', book_section_path(@book, @section.previous_section), class: 'btn btn-outline-secondary prev-btn' %>
+        <%= link_to 'Next >', book_section_path(@book, @section.next_section), class: 'btn btn-outline-secondary next-btn' %>
+      </div>
+      <div class="right">
+        <span class="text-secondary"><%= "#{@section.progress}%" %></span>
+      </div>
     </div>
   </div>
 </div>
-
-

@@ -1,11 +1,13 @@
-<%= link_to content_handle_bookmark_path(content), remote: true, class: "text-decoration-none" do %>
-  <div class="book-page-content-container">
+<div class="book-page-content-container">
+  <%= link_to content_handle_bookmark_path(content), remote: true, class: "text-decoration-none" do %>
     <%= render partial: 'bookmark',
                locals:  {
                  content:    content,
                  bookmarked: @metadata&.content_bookmarks.include?(content.id) || false
                } %>
+  <% end %>
 
+  <%= link_to content_handle_bookmark_path(content), remote: true, class: "text-decoration-none text-link-container" do %>
     <div class="book-content-text-container">
       <% if content.content_type == 'p' %>
         <p><%= content.text %></p>
@@ -15,8 +17,12 @@
         <p><%= content.text %></p>
       <% end %>
     </div>
+  <% end %>
 
-    <%= render partial: 'actions' %>
+  <%= link_to content_comments_path(content),
+              data:  { turbo_frame: 'comments_modal' },
+              class: 'text-decoration-none' do %>
+    <%= render partial: 'sections/actions' %>
+  <% end %>
 
-  </div>
-<% end %>
+</div>

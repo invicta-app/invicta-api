@@ -21,6 +21,9 @@ Rails.application.routes.draw do
   end
 
   resources :contents, only: :show do
+    resources :comments, only: [:index, :create]
+
     get 'handle_bookmark'
   end
+
 end
