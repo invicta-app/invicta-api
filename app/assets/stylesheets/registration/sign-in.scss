@@ -1,9 +1,49 @@
-.sign-in-container {
+.sign-in-page {
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
-}
+  padding: 1em;
 
-.sign-in-form-container {
+  .banner {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    @media(min-width: $breakpoint-tablet) {
+      flex-direction: row;
+    }
 
+    h1 {
+      font-size: 3em;
+    }
+
+    .hook {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 80vh;
+      margin: 0 4em;
+    }
+  }
+
+  .sign-in-container {
+    display: flex;
+    align-items: center;
+  }
+
+  .sign-in {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: $invicta-hover;
+    border-radius: 8px;
+    padding: 1em;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+    width: 100%;
+
+    .field {
+      margin: 15px 0 !important;
+    }
+  }
 }

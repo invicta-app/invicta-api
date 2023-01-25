@@ -6,17 +6,16 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <!--        <li class="nav-item">-->
-        <!--          <a class="nav-link" href="#">Link</a>-->
-        <!--        </li>-->
       </ul>
       <ul class="navbar-nav navbar-options-invicta text-secondary">
         <% if current_user %>
-          <li class="nav-item"> <%= link_to "Edit Account", edit_user_registration_path, class: "nav-link text-light" %></li>
-          <li class="nav-item"> <%= button_to "Sign Out", destroy_user_session_path, method: :delete, class: "btn btn-small btn-secondary mx-2" %></li>
+          <li class="nav-item"> <%= link_to "About", info_index_path, class: "nav-link text-light -underline" %></li>
+          <li class="nav-item"> <%= link_to "Edit Profile", edit_user_registration_path, class: "nav-link text-light" %></li>
+          <li class="nav-item"> <%= link_to "Sign Out", destroy_user_session_path, method: :delete, class: "nav-link text-light" %></li>
         <% else %>
-          <li class="nav-item"> <%= link_to "Sign Up", new_user_registration_path, class: "nav-link" %></li>
-          <li class="nav-item"> <%= link_to "Sign In", new_user_session_path, class: "nav-link" %></li>
+          <li class="nav-item"> <%= link_to "About", info_index_path, class: "nav-link text-light -underline" %></li>
+          <li class="nav-item"> <%= link_to "Sign Up", new_user_registration_path, class: "nav-link text-light" %></li>
+          <li class="nav-item"> <%= link_to "Sign In", new_user_session_path, class: "nav-link text-light" %></li>
         <% end %>
       </ul>
     </div>

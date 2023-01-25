@@ -13,4 +13,12 @@
 .navbar-invicta {
   z-index: 100;
   background-color: $invicta-navbar;
+
+  li {
+    border-radius: 6px;
+
+    &:hover {
+      background-color: $orange;
+    }
+  }
 }
