@@ -120,7 +120,6 @@ GEM
     jbuilder (2.11.5)
       actionview (>= 5.0.0)
       activesupport (>= 5.0.0)
-    jquery (0.0.1)
     jsbundling-rails (1.1.1)
       railties (>= 6.0.0)
     loofah (2.19.0)
@@ -144,6 +143,8 @@ GEM
       net-protocol
     nio4r (2.5.8)
     nokogiri (1.13.9-arm64-darwin)
+      racc (~> 1.4)
+    nokogiri (1.13.9-x86_64-linux)
       racc (~> 1.4)
     orm_adapter (0.5.0)
     pg (1.4.5)
@@ -243,6 +244,7 @@ GEM
 PLATFORMS
   arm64-darwin-21
   arm64-darwin-22
+  x86_64-linux
 
 DEPENDENCIES
   annotate
@@ -256,7 +258,6 @@ DEPENDENCIES
   font-awesome-sass (~> 6.2.1)
   importmap-rails
   jbuilder
-  jquery (~> 0.0.1)
   jsbundling-rails (~> 1.1.1)
   pg
   popper_js (~> 2.11)
