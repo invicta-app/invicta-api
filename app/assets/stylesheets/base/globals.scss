@@ -1,8 +1,14 @@
+// Colors
 $invicta-dark: #2c3034;
 $invicta-text: #d9d9d9;
 $invicta-hover: #1e1e1e;
 $invicta-navbar: #262626;
 $invicta-dark-grey: #4b4b4b;
+// Media Breakpoints
+$breakpoint-mobile: 480px;
+$breakpoint-mobile-tablet: 624px;
+$breakpoint-tablet: 768px;
+$breakpoint-laptop: 924px;
 .mini-font {
   font-size: 14px;
 }
@@ -10,6 +16,8 @@ $invicta-dark-grey: #4b4b4b;
 body {
   background-color: $invicta-dark;
   color: $invicta-text;
+  border: none !important;
+  border-color: $invicta-dark;
 }
 
 .bg-grey {
@@ -27,4 +35,17 @@ html {
 
 *, *:before, *:after {
   box-sizing: inherit;
+}
+
+.invicta-dark-grey { background-color: $invicta-dark-grey }
+
+.invicta-text { color: $invicta-text !important }
+
+input, textarea {
+  background-color: $invicta-dark-grey !important;
+  color: $invicta-text !important;
+}
+
+.form-control {
+  border: 0 !important;
 }
