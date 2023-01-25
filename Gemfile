@@ -24,7 +24,6 @@ gem "bootstrap", "~> 5.1.3"
 gem "jsbundling-rails", "~> 1.1.1"
 gem "cssbundling-rails", "~> 1.1.2"
 gem "font-awesome-sass", "~> 6.2.1"
-gem "font-awesome-rails"
 
 # Business
 gem "devise", "~> 4.8.1"

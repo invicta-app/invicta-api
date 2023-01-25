@@ -6,12 +6,11 @@ class CommentsController < ApplicationController
     @comments = Comment.where(book_contents_id: params[:content_id])
     # TODO - sort
 
-    render turbo_stream:
-             turbo_stream.replace(
-               "comments_modal",
-               partial: 'sections/comments_modal',
-               locals:  { comments: @comments, content: @content }
-             )
+    # TODO - Turbostream Response
+    response do |format|
+      format.html
+      format.json
+    end
   end
 
   def create
@@ -25,12 +24,7 @@ class CommentsController < ApplicationController
     @comments = Comment.where(book_contents_id: params[:content_id])
     # TODO - sort
 
-    render turbo_stream:
-             turbo_stream.replace(
-               "#{@content.id}_comment",
-               partial: 'sections/comments',
-               locals:  { comments: @comments, content: content }
-             )
+    # TODO - Turbostream Response
   end
 
   private

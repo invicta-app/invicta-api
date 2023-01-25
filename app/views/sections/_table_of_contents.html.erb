@@ -1,16 +1,15 @@
-<div class="table-of-contents-spacer"/>
-<div class="table-of-contents">
-  <div class="sections">
-    <% sections.each do |section| %>
-      <%= link_to book_section_path(@book, section), class: "text-decoration-none" do %>
-        <% current = section.id == current_section.id %>
-        <div class="section <%= current && "current-section" %>">
-          <div class="text-secondary">
-            <i class="fa-solid fa-feather-pointed"></i>
-          </div>
-          <h6>Section <%= section.sequence %></h6>
-        </div>
-      <% end %>
-    <% end %>
-  </div>
-</div>
+<!--<div class="table-of-contents">-->
+<!--  <div class="sections">-->
+<%# sections.each do |section| %>
+<%#= link_to book_section_path(@book, section), class: "text-decoration-none" do %>
+<%# current = section.id == current_section.id %>
+<!--        <div class="section <%#= current && "current-section" %>">-->
+<!--          <div class="text-secondary">-->
+<!--            <i class="fa-solid fa-feather-pointed"></i>-->
+<!--          </div>-->
+<!--          <h6>Section <%#= section.sequence %></h6>-->
+<!--        </div>-->
+<%# end %>
+<%# end %>
+<!--  </div>-->
+<!--</div>-->
