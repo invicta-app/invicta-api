@@ -2,15 +2,15 @@
 #
 # Table name: book_sections
 #
-#  id            :uuid             not null, primary key
-#  length        :integer
-#  section_title :string
-#  section_type  :string
-#  sequence      :integer
-#  created_at    :datetime         not null
-#  updated_at    :datetime         not null
-#  book_id       :uuid             not null
-#  ref_id        :string
+#  id           :uuid             not null, primary key
+#  length       :integer
+#  section_type :string
+#  sequence     :integer
+#  title        :string
+#  created_at   :datetime         not null
+#  updated_at   :datetime         not null
+#  book_id      :uuid             not null
+#  ref_id       :string
 #
 # Indexes
 #

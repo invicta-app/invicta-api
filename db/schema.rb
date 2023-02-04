@@ -31,7 +31,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_22_155745) do
   create_table "book_sections", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "book_id", null: false
     t.string "ref_id"
-    t.string "section_title"
+    t.string "title"
     t.integer "sequence"
     t.integer "length"
     t.string "section_type"

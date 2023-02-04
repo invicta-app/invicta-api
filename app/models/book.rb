@@ -24,8 +24,8 @@ class Book < ApplicationRecord
   self.table_name = 'books'
 
   has_many :book_sections, class_name: BookSection.name, dependent: :destroy
-  has_many :book_contents, through: :book_sections
-  has_many :user_book_metadatas
+  has_many :book_contents, through: :book_sections, dependent: :destroy
+  has_many :user_book_metadatas, dependent: :destroy
 
   # Validations
   validates :title, presence: true
@@ -47,6 +47,10 @@ class Book < ApplicationRecord
       user:               user,
       current_section_id: section.id
     )
+  end
+
+  def table_of_contents
+    return
   end
 
   ### Class Methods
