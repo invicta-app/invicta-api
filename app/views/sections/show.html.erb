@@ -17,9 +17,9 @@
       <p class="mb-2 pb-1 mini-font text-secondary">
         <%= "Section #{@section.sequence}" %><%= ", Paragraph #{params["content"]}" if params["content"] %>
       </p>
-      <!--    <h5 class="mb-3">-->
-      <!--      On The Subject Of Matters <%#= @section.section_title %>-->
-      <!--    </h5>-->
+      <h4 class="mb-3">
+        <%= @section.title %>
+      </h4>
     </div>
 
     <div class="book-page-body mb-3">

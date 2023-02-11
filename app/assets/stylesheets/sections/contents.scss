@@ -23,6 +23,8 @@
   .book-content-text-container {
     flex-grow: 100;
     color: $invicta-text !important;
+
+    p { white-space: pre-line; }
   }
 }
 

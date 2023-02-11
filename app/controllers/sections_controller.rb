@@ -36,7 +36,7 @@ class SectionsController < ApplicationController
     metadata  = UserBookMetadata.find_by(user: current_user, book: @book)
 
     if metadata.blank?
-      UserBookMetadata.create!(
+      metadata = UserBookMetadata.create!(
         book:               @book,
         user:               current_user,
         current_section_id: @section.id

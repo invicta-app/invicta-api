@@ -8,7 +8,7 @@
   <% end %>
 
   <%= link_to content_handle_bookmark_path(content), remote: true, class: "text-decoration-none text-link-container" do %>
-    <div class="book-content-text-container">
+    <div class="book-content-text-container <%= content.text.length < 5 && "text-center" %>">
       <% if content.content_type == 'p' %>
         <p><%= content.text %></p>
       <% elsif content.content_type == 'blockquote' %>
