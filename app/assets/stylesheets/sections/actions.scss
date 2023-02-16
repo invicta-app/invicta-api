@@ -4,14 +4,14 @@
   flex-direction: row-reverse;
   flex-grow: 100;
   align-items: center;
-  color: $invicta-dark-grey;
+  color: $invicta-grey-light;
   transition: 0.15s;
-
-  &:hover { color: deepskyblue !important }
 
   .comment-wrapper {
     padding: 0 1.4em;
     height: 100%;
     transition: 0.15s;
   }
+
+  &:hover { color: deepskyblue !important }
 }

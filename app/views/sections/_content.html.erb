@@ -1,28 +1,40 @@
-<div class="book-page-content-container">
+<div class="book-page-content-container <%= disable_actions?(content) && 'content-hover' %>">
   <%= link_to content_handle_bookmark_path(content), remote: true, class: "text-decoration-none" do %>
     <%= render partial: 'bookmark',
                locals:  {
                  content:    content,
-                 bookmarked: @metadata&.content_bookmarks.include?(content.id) || false
+                 bookmarked: @metadata&.content_bookmarks.include?(content.id) || false,
+                 disabled:   disable_actions?(content)
                } %>
   <% end %>
 
-  <%= link_to content_handle_bookmark_path(content), remote: true, class: "text-decoration-none text-link-container" do %>
-    <div class="book-content-text-container <%= content.text.length < 5 && "text-center" %>">
-      <% if content.content_type == 'p' %>
-        <p><%= content.text %></p>
-      <% elsif content.content_type == 'blockquote' %>
-        <blockquote><%= content.text %></blockquote>
-      <% else %>
-        <p><%= content.text %></p>
-      <% end %>
+  <% if disable_actions? content %>
+    <div
+      class="book-content-text-container pe-4
+            <%= content.text.length < 5 && "text-center" %>
+            <%= (content.text == content.text.upcase) && "capitalized" %>">
+      <%= raw markdown content.text %>
     </div>
-  <% end %>
-
-  <%= link_to content_comments_path(content),
+  <% else %>
+    <%= link_to content_handle_bookmark_path(content), remote: true, class: "text-decoration-none text-link-container" do %>
+      <div
+        class="book-content-text-container pe-4
+            <%= content.text.length < 5 && "text-center" %>
+            <%= (content.text == content.text.upcase) && "capitalized" %>">
+        <%# Ignores content.content_type & metadata FOR NOW %>
+        <%= raw markdown content.text %>
+      </div>
+    <% end %>
+    <%# TODO - Comments after User Testing %>
+    <%# link_to content_comments_path(content),
               data:  { turbo_frame: 'comments_modal' },
               class: 'text-decoration-none' do %>
-    <%= render partial: 'sections/actions' %>
+    <%# render partial: 'sections/actions',
+               locals:  {
+                 disabled: disable_actions?(content)
+               }
+    %>
+    <%# end %>
   <% end %>
 
 </div>
