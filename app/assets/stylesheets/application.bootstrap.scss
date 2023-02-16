@@ -1,13 +1,19 @@
 @import "../../../node_modules/bootstrap/scss/bootstrap";
 @import "../../../node_modules/bootstrap-icons/font/bootstrap-icons";
+@import "font-awesome";
 
 @import "base/globals";
 @import "navbar/index";
+
 @import "books/index/index";
 @import "books/index/book";
+
 @import "sections/show";
 @import "sections/contents";
 @import "sections/actions";
+@import "sections/bookmark";
+@import "sections/table-of-contents";
+
 @import "registration/sign-up";
-@import "info/index";
 @import "registration/sign-in";
+@import "info/index";

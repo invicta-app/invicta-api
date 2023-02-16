@@ -106,6 +106,8 @@ GEM
     erubi (1.11.0)
     execjs (2.8.1)
     ffi (1.15.5)
+    font-awesome-sass (6.1.2)
+      sassc (~> 2.0)
     globalid (1.0.0)
       activesupport (>= 5.0)
     i18n (1.12.0)
@@ -179,6 +181,7 @@ GEM
       thor (~> 1.0)
       zeitwerk (~> 2.5)
     rake (13.0.6)
+    redcarpet (3.6.0)
     regexp_parser (2.6.1)
     responders (3.0.1)
       actionpack (>= 5.0)
@@ -250,6 +253,7 @@ DEPENDENCIES
   cssbundling-rails (~> 1.1.2)
   debug
   devise (~> 4.8.1)
+  font-awesome-sass (~> 6.1.1)
   importmap-rails
   jbuilder
   jsbundling-rails (~> 1.1.1)
@@ -257,6 +261,7 @@ DEPENDENCIES
   popper_js (~> 2.11)
   puma (~> 5.0)
   rails (~> 7.0.4)
+  redcarpet (~> 3.6.0)
   sass-rails
   sassc-rails (~> 2.1.2)
   selenium-webdriver

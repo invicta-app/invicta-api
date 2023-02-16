@@ -1,0 +1,93 @@
+.toc-toggle {
+  height: 3em;
+  width: 1.6em;
+  border: 1px solid $invicta-dark-grey;
+  border-left: 0;
+  border-radius: 0 8px 8px 0;
+  background-color: $invicta-navbar;
+  z-index: 1000;
+  position: fixed;
+  left: 20em;
+  top: 18vh;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: $invicta-grey-light;
+}
+
+.toc-container {
+  display: block;
+  width: 20%;
+  height: 100vh;
+  position: relative;
+}
+
+.table-of-contents::-webkit-scrollbar {
+  display: none; /* for Chrome, Safari, and Opera */
+}
+
+.table-of-contents {
+  //overflow-y: scroll;
+  overflow: auto;
+  top: 0;
+  left: 0;
+  border-right: 1px solid $invicta-dark-grey;
+  z-index: 199;
+  height: 100vh;
+  background-color: $invicta-navbar;
+  position: fixed;
+  width: 20em;
+
+  .invicta-logo {
+    font-size: 24px;
+    margin: 0 18px;
+    font-weight: bold;
+  }
+
+  .toc-header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin: 14px 0;
+  }
+
+  .sections {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 0 5px;
+  }
+
+  .section {
+    color: $invicta-text !important;
+    margin: 0;
+    padding: 0.45em 0.80em;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+
+    h6 { line-height: 1.5 }
+
+    &:hover {
+      background-color: $invicta-hover;
+    }
+
+    i {
+      padding-right: 0.8em;
+      opacity: 0.6;
+    }
+  }
+
+  .current-section {
+    background-color: $orange;
+    color: white;
+  }
+
+  h6 {
+    margin: 0;
+    display: inline;
+  }
+}
+

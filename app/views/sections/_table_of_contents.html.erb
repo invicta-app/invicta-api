@@ -1,15 +1,26 @@
-<!--<div class="table-of-contents">-->
-<!--  <div class="sections">-->
-<%# sections.each do |section| %>
-<%#= link_to book_section_path(@book, section), class: "text-decoration-none" do %>
-<%# current = section.id == current_section.id %>
-<!--        <div class="section <%#= current && "current-section" %>">-->
-<!--          <div class="text-secondary">-->
-<!--            <i class="fa-solid fa-feather-pointed"></i>-->
-<!--          </div>-->
-<!--          <h6>Section <%#= section.sequence %></h6>-->
-<!--        </div>-->
-<%# end %>
-<%# end %>
-<!--  </div>-->
-<!--</div>-->
+<div class="table-of-contents">
+  <div class="toc-header">
+    <div class="invicta-logo">
+      <a class="navbar-brand ms-2 navbar-brand-invicta" href="/">Invicta 📗</a>
+    </div>
+  </div>
+  <hr/>
+  <div class="sections">
+    <% @book.table_of_contents.each do |segment| %>
+      <% unless segment[:title].empty? %>
+        <%= link_to book_section_path(@book, segment[:id]), class: "text-decoration-none" do %>
+          <% current = segment[:id] == current_section.id %>
+          <div class="section <%= current && "current-section" %>">
+            <div class="text-secondary">
+              <i class="fa-solid fa-caret-right"></i>
+            </div>
+            <h6 class="<%= (segment[:title].upcase.include? 'PART') && 'fw-bold lead' %>">
+              <%= segment[:title] %>
+            </h6>
+          </div>
+        <% end %>
+      <% end %>
+    <% end %>
+  </div>
+  <br/>
+</div>

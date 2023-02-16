@@ -1,40 +1,47 @@
-<div class="section-show">
-  <%= render partial: 'table_of_contents',
-             locals:  {
-               current_section: @section,
-               sections:        @book.book_sections } %>
+<div class="section-show" data-controller="sections">
+  <div id="toc-container" class="toc-container" data-sections-target="hideable">
+    <%= render partial: 'table_of_contents',
+               locals:  {
+                 current_section: @section,
+                 sections:        @book.book_sections } %>
+  </div>
 
-  <div class="book-page toc-enabled toc-disabled">
+  <div id="toc-toggle" class="toc-toggle" onclick="toggleToc()">
+    <i class="fa-solid fa-caret-right"></i>
+  </div>
+
+  <div class="book-page">
     <div class="toc-icon-container">
       <i class="fa-solid fa-chevrons-right"></i>
     </div>
-    <div class="book-page-header text-secondary">
+    <div class="header text-secondary">
       <p class="mb-0"><%= @book.title %></p>
       <p class="mb-0"><%= @book.author %></p>
     </div>
 
-    <div class="book-page-title">
-      <p class="mb-2 pb-1 mini-font text-secondary">
-        <%= "Section #{@section.sequence}" %><%= ", Paragraph #{params["content"]}" if params["content"] %>
-      </p>
-      <h4 class="mb-3">
+    <div class="title">
+      <h4 class="mt-3 display-5">
         <%= @section.title %>
       </h4>
     </div>
 
+    <hr style="color: white; height: 2px; width: 20px;" class="my-3"/>
+
     <div class="book-page-body mb-3">
-      <div class="book-page-text-body">
-        <% @contents.each do |content| %>
-          <%= render partial: 'content', locals: { content: content } %>
-        <% end %>
-      </div>
+      <% @contents.each_with_index do |content, index| %>
+        <%= render partial: 'content', locals: { content: content, index: index } %>
+      <% end %>
     </div>
 
-    <div class="book-page-actions">
+    <div class="actions">
       <div class="left">📚</div>
       <div class="middle">
-        <%= link_to '< Prev', book_section_path(@book, @section.previous_section), class: 'btn btn-outline-secondary prev-btn' %>
-        <%= link_to 'Next >', book_section_path(@book, @section.next_section), class: 'btn btn-outline-secondary next-btn' %>
+        <%= link_to book_section_path(@book, @section.previous_section), class: 'mx-4' do %>
+          <i class="fa-solid fa-chevron-left"></i>
+        <% end %>
+        <%= link_to book_section_path(@book, @section.next_section), class: 'mx-4' do %>
+          <i class="fa-solid fa-chevron-right"></i>
+        <% end %>
       </div>
       <div class="right">
         <span class="text-secondary"><%= "#{@section.progress}%" %></span>
@@ -42,3 +49,26 @@
     </div>
   </div>
 </div>
+
+<script>
+    const toggleToc = () => {
+        let toc = document.getElementById('toc-container')
+        let toggle = document.getElementById('toc-toggle')
+
+        if (!toc.style.display) {
+            toc.style.display = 'none'
+            toggle.style.left = '0';
+            return;
+        }
+
+        if (toc.style.display === 'block') {
+            toc.style.display = 'none'
+            toggle.style.left = '0'
+            return;
+        }
+        if (toc.style.display === 'none') {
+            toc.style.display = 'block'
+            toggle.style.left = '20em'
+        }
+    }
+</script>

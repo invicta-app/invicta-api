@@ -50,7 +50,9 @@ class Book < ApplicationRecord
   end
 
   def table_of_contents
-    return
+    self.book_sections
+        .pluck(:id, :title, :sequence)
+        .map { |el| { id: el[0], title: el[1], sequence: el[2] } }
   end
 
   ### Class Methods
