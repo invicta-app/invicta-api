@@ -27,7 +27,10 @@ class Book < ApplicationRecord
   has_many :book_contents, through: :book_sections, dependent: :destroy
   has_many :user_book_metadatas, dependent: :destroy
 
-  # Validations
+  ### Aliases
+  alias_attribute :sections, :book_sections
+
+  ### Validations
   validates :title, presence: true
 
   ### Instance Methods
@@ -51,8 +54,13 @@ class Book < ApplicationRecord
 
   def table_of_contents
     self.book_sections
-        .pluck(:id, :title, :sequence)
-        .map { |el| { id: el[0], title: el[1], sequence: el[2] } }
+        .pluck(:id, :title, :sequence, :section_type, :icon)
+        .map { |el| { id:           el[0],
+                      title:        el[1],
+                      sequence:     el[2],
+                      section_type: el[3],
+                      icon:         el[4] } }
+        .sort_by { |segment| segment[:sequence] }
   end
 
   ### Class Methods

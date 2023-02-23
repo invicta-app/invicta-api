@@ -1,19 +1,82 @@
 <div class="table-of-contents">
   <div class="toc-header">
-    <div class="invicta-logo">
-      <a class="navbar-brand ms-2 navbar-brand-invicta" href="/">Invicta 📗</a>
+    <div class="invicta-logo mt-2 mb-3">
+      <a class="navbar-brand navbar-brand-invicta" href="/">Invicta 📗</a>
+    </div>
+    <div class="book-info mb-2">
+      <h4 class="lead text-center fs-4"><%= @book.title %></h4>
+      <p class="text-secondary text-center">by <%= @book.author %></p>
+      <input class="form-control" type="text" placeholder="Search coming soon" disabled>
     </div>
   </div>
-  <hr/>
   <div class="sections">
+    <% table = organize_toc(@book.table_of_contents) %>
+
+    <%# Info %>
+    <div class="section">
+      <% if true %>
+        <div class="header">
+          <h6>Info</h6>
+          <i class="fa-solid <%= 'fa-chevron-right' || 'fa-chevron-down' %>"></i>
+        </div>
+        <div style="display: none">
+          <% table[:introduction].each do |section| %>
+            <%= link_to book_section_path(@book, section[:id]) do %>
+              <p><%= section[:introduction] %></p>
+            <% end %>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+
+    <%# Introduction %>
+    <div class="section">
+      <% if table[:introduction].length > 0 %>
+        <div class="header">
+          <h6>Introduction</h6>
+          <i class="fa-solid <%= 'fa-chevron-right' || 'fa-chevron-down' %>"></i>
+        </div>
+        <div style="display: none">
+          <% table[:introduction].each do |section| %>
+            <%= link_to book_section_path(@book, section[:id]) do %>
+              <p><%= section[:title] %></p>
+            <% end %>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+
+    <%# PARTS %>
+    <% table[:parts].each do |part| %>
+      <div class="section">
+        <div class="header">
+          <h6><%= part[:title] %></h6>
+          <i class="fa-solid <%= 'fa-chevron-right' || 'fa-chevron-down' %>"></i>
+        </div>
+        <div style="display: none">
+          <% table[:introduction].each do |section| %>
+            <%= link_to book_section_path(@book, section[:id]) do %>
+              <p><%= section[:title] %></p>
+            <% end %>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+
+    <%# Conclusion %>
+    <div class="section">
+      <% if true %>
+        <div class="header">
+          <h6>Conclusion</h6>
+          <i class="fa-solid <%= 'fa-chevron-right' || 'fa-chevron-down' %>"></i>
+        </div>
+      <% end %>
+    </div>
     <% @book.table_of_contents.each do |segment| %>
       <% unless segment[:title].empty? %>
         <%= link_to book_section_path(@book, segment[:id]), class: "text-decoration-none" do %>
           <% current = segment[:id] == current_section.id %>
           <div class="section <%= current && "current-section" %>">
-            <div class="text-secondary">
-              <i class="fa-solid fa-caret-right"></i>
-            </div>
             <h6 class="<%= (segment[:title].upcase.include? 'PART') && 'fw-bold lead' %>">
               <%= segment[:title] %>
             </h6>

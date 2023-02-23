@@ -14,32 +14,54 @@
     <div class="toc-icon-container">
       <i class="fa-solid fa-chevrons-right"></i>
     </div>
-    <div class="header text-secondary">
-      <p class="mb-0"><%= @book.title %></p>
-      <p class="mb-0"><%= @book.author %></p>
-    </div>
-
     <div class="title">
       <h4 class="mt-3 display-5">
         <%= @section.title %>
       </h4>
     </div>
-
     <hr style="color: white; height: 2px; width: 20px;" class="my-3"/>
 
     <div class="book-page-body mb-3">
+      <% collapsed = [] %>
+
       <% @contents.each_with_index do |content, index| %>
-        <%= render partial: 'content', locals: { content: content, index: index } %>
+        <%#= "beginning of loop: #{content.sequence}" %>
+
+        <% if collapse? content %>
+          <% collapsed.push(content) %>
+        <% elsif collapsed.length > 0 %>
+          <div id="collapse-actions-container-<%= index %>" class="collapse-actions-container my-2">
+            <div class="icon-container mx-3" onclick="uncollapse(<%= index %>)">
+              <i class="fa-solid fa-up-down fa-sm"></i>
+            </div>
+          </div>
+
+          <div id="collapsed-container-<%= index %>" class="collapsed-content-container my-2">
+            <hr/>
+            <% collapsed.each do |collapsed_content| %>
+              <%= "collapsed: #{collapsed_content.sequence}" %>
+              <%= render partial: 'content', locals: { content: collapsed_content, index: index } %>
+            <% end %>
+            <hr/>
+            <% collapsed = [] %>
+          </div>
+          <%#= "post collapsed: #{content.sequence}" %>
+          <%= render partial: 'content', locals: { content: content, index: index } %>
+        <% else %>
+          <%#= 'TRUE' %>
+          <%#= "regular: #{content.sequence}" %>
+          <%= render partial: 'content', locals: { content: content, index: index } %>
+        <% end %>
       <% end %>
     </div>
 
     <div class="actions">
-      <div class="left">📚</div>
+      <div class="left"></div>
       <div class="middle">
-        <%= link_to book_section_path(@book, @section.previous_section), class: 'mx-4' do %>
+        <%= link_to book_section_path(@book, @section.previous_section), class: 'px-4', id: 'prev-section-button' do %>
           <i class="fa-solid fa-chevron-left"></i>
         <% end %>
-        <%= link_to book_section_path(@book, @section.next_section), class: 'mx-4' do %>
+        <%= link_to book_section_path(@book, @section.next_section), class: 'px-4', id: 'next-section-button' do %>
           <i class="fa-solid fa-chevron-right"></i>
         <% end %>
       </div>
@@ -51,7 +73,20 @@
 </div>
 
 <script>
-    const toggleToc = () => {
+    window.addEventListener('keydown', (e) => {
+        const key = e.key
+
+        switch (key) {
+            case 'ArrowLeft':
+                document.getElementById('prev-section-button').click()
+                break;
+            case 'ArrowRight':
+                document.getElementById('next-section-button').click()
+                break;
+        }
+    })
+
+    function toggleToc() {
         let toc = document.getElementById('toc-container')
         let toggle = document.getElementById('toc-toggle')
 
@@ -70,5 +105,14 @@
             toc.style.display = 'block'
             toggle.style.left = '20em'
         }
+    }
+
+    function uncollapse(index) {
+        let container = document.getElementById(`collapsed-container-${index}`)
+        let actions = document.getElementById(`collapse-actions-container-${index}`)
+
+        container.style.height = '100%'
+        container.style.maxHeight = '1000em'
+        actions.style.display = 'none'
     }
 </script>

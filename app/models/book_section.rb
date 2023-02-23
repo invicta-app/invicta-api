@@ -3,6 +3,7 @@
 # Table name: book_sections
 #
 #  id           :uuid             not null, primary key
+#  icon         :string
 #  length       :integer
 #  section_type :string
 #  sequence     :integer
@@ -25,8 +26,17 @@ class BookSection < ApplicationRecord
 
   belongs_to :book, class_name: Book.name
   has_many :book_contents, class_name: BookContent.name, dependent: :destroy
+  enum section_type: {
+    introduction: 'introduction',
+    part:         'part',
+    chapter:      'chapter',
+    info:         'info'
+  }
 
-  # Validations
+  ### Aliases
+  alias_attribute :contents, :book_contents
+
+  ### Validations
   validates :length, presence: true
 
   ### Instance Methods

@@ -10,20 +10,11 @@
       </p>
       <p class="m-0 text-primary book-display-description">
         <% if book.description.present? %>
-          <%= book.description %>
+          <b>AI Summary: </b><%= book.description %>
         <% else %>
           <i>No book description provided.</i>
         <% end %>
       </p>
-      <!--      <div class="progress" style="width: 100%; height: 5px;">-->
-      <!--        <div-->
-      <!--          class="progress-bar"-->
-      <!--          role="progressbar"-->
-      <!--          aria-valuenow="<%#= %>"-->
-      <!--          aria-valuemin="<%#= 0 %>"-->
-      <!--          aria-valuemax="<%#= 100 %> %>"-->
-      <!--        ></div>-->
-      <!--      </div>-->
     </div>
   </div>
 <% end %>

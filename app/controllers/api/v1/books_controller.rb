@@ -16,7 +16,7 @@ module Api
 
       def create
         params.permit!
-        BookCreator.call(params[:volume], params[:metadata], params[:table_of_contents])
+        CreateBook.call(params[:volume], params[:metadata], params[:table_of_contents])
 
         render json: {
           status:  'SUCCESS',

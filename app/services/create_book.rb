@@ -1,7 +1,8 @@
-class BookCreator < ApplicationService
+class CreateBook < ApplicationService
   def initialize(volume, metadata, table_of_contents)
     @volume            = volume
     @metadata          = metadata
+    @sections          = []
     @table_of_contents = table_of_contents
   end
 
@@ -10,7 +11,8 @@ class BookCreator < ApplicationService
 
     ActiveRecord::Base.transaction do
       book = Book.create!(@metadata)
-      @volume.each { |section| create_section(section, book.id) }
+      @volume.each { |section| @sections.push(create_section(section, book.id)) }
+      @sections.each { |section| create_table_of_contents(section, book.id) }
     end
   end
 
