@@ -8,9 +8,7 @@
   transition: 0.15s;
   color: $invicta-text !important;
 
-  .content-hover {
-    &:hover { background: $invicta-hover }
-  }
+  &:hover { background: $invicta-grey }
 
   p {
     margin-bottom: 0;
@@ -40,6 +38,6 @@
     font-size: 26px;
     text-align: center;
     padding-top: 0.6em;
-    padding-bottom: 0.6em;
+    padding-bottom: 0.3em;
   }
 }

@@ -1,10 +1,15 @@
 // Colors
-$invicta-dark: #2c3034;
-$invicta-text: #d9d9d9;
-$invicta-hover: #1e1e1e;
-$invicta-navbar: #262626;
-$invicta-dark-grey: #4b4b4b;
-$invicta-grey-light: #505050;
+$invicta-white: #eaeaea;
+$invicta-text: #e6e6e3;
+$invicta-contrast: #5AB1BB;
+$invicta-theme: #DF9216;
+$invicta-light-grey: #494542;
+$invicta-grey: #333333;
+$invicta-dark: #292929;
+$invicta-shade: #1F1F1F;
+$invicta-black: #141414;
+// Font sizes
+$invicta-font-small: 12px;
 // Media Breakpoints
 $breakpoint-mobile: 480px;
 $breakpoint-mobile-tablet: 624px;
@@ -38,12 +43,12 @@ html {
   box-sizing: inherit;
 }
 
-.invicta-dark-grey { background-color: $invicta-dark-grey }
+.invicta-dark-grey { background-color: $invicta-shade }
 
 .invicta-text { color: $invicta-text !important }
 
 input, textarea {
-  background-color: $invicta-dark-grey !important;
+  background-color: $invicta-black !important;
   color: $invicta-text !important;
 }
 
@@ -53,8 +58,4 @@ input, textarea {
 
 p {
   font-size: 18px;
-}
-
-body::-webkit-scrollbar {
-  display: none !important; /* for Chrome, Safari, and Opera */
 }

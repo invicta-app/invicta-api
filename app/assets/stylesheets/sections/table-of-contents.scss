@@ -1,19 +1,19 @@
 .toc-toggle {
   height: 3em;
   width: 1.6em;
-  border: 1px solid $invicta-dark-grey;
+  border: 1px solid $invicta-light-grey;
   border-left: 0;
   border-radius: 0 8px 8px 0;
-  background-color: $invicta-navbar;
+  background-color: $invicta-shade;
   z-index: 1000;
   position: fixed;
-  left: 20em;
+  left: 21.5em;
   top: 18vh;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: $invicta-grey-light;
+  color: $invicta-light-grey;
 }
 
 .toc-container {
@@ -32,32 +32,39 @@
   overflow: auto;
   top: 0;
   left: 0;
-  border-right: 1px solid $invicta-dark-grey;
+  border-right: 1px solid $invicta-light-grey;
   z-index: 199;
   height: 100vh;
-  background-color: $invicta-navbar;
+  background-color: $invicta-shade;
   position: fixed;
-  width: 20em;
+  width: 21.5em;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+
+  .book-info {
+    p {
+      font-size: $invicta-font-small;
+    }
+  }
 
   .invicta-logo {
     font-size: 24px;
-    margin: 0 18px;
     font-weight: bold;
   }
 
   .toc-header {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: space-between;
     align-items: center;
     margin: 14px 0;
+    padding: 0 15px;
   }
 
   .sections {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    margin: 0 5px;
+    margin: 10px 10px;
   }
 
   .section {
@@ -67,11 +74,19 @@
     border-radius: 8px;
     display: flex;
     align-items: center;
+    justify-content: space-between;
+
+    .header {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
 
     h6 { line-height: 1.5 }
 
     &:hover {
-      background-color: $invicta-hover;
+      background-color: $invicta-dark;
     }
 
     i {
@@ -81,8 +96,12 @@
   }
 
   .current-section {
-    background-color: $orange;
+    background-color: $invicta-theme;
     color: white;
+
+    &:hover {
+      background-color: $invicta-theme;
+    }
   }
 
   h6 {
