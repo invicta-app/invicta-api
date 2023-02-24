@@ -9,81 +9,121 @@
       <input class="form-control" type="text" placeholder="Search coming soon" disabled>
     </div>
   </div>
+
   <div class="sections">
     <% table = organize_toc(@book.table_of_contents) %>
 
     <%# Info %>
-    <div class="section">
-      <% if true %>
+    <% if table[:info].length > 0 %>
+      <div
+        class="section"
+        data-bs-toggle="collapse"
+        data-bs-target="#info-collapse"
+        onclick="toggleList('info-container')"
+        id="info-container">
         <div class="header">
           <h6>Info</h6>
-          <i class="fa-solid <%= 'fa-chevron-right' || 'fa-chevron-down' %>"></i>
+          <i class="fa-solid fa-chevron-right"></i>
         </div>
-        <div style="display: none">
-          <% table[:introduction].each do |section| %>
-            <%= link_to book_section_path(@book, section[:id]) do %>
-              <p><%= section[:introduction] %></p>
-            <% end %>
+      </div>
+      <div class="<%= collapse_segment(table[:info], current_section) %>" id="info-collapse">
+        <% table[:info].each do |section| %>
+          <%= link_to book_section_path(@book, section[:id]), class: 'text-decoration-none' do %>
+            <div class="sub-section <%= current_section.id == section[:id] && 'current-section' %>">
+              <p><%= section[:title] %></p>
+            </div>
           <% end %>
-        </div>
-      <% end %>
-    </div>
+        <% end %>
+      </div>
+    <% end %>
 
     <%# Introduction %>
-    <div class="section">
-      <% if table[:introduction].length > 0 %>
+    <% if table[:introduction].length > 0 %>
+      <div
+        class="section"
+        data-bs-toggle="collapse"
+        data-bs-target="#intro-collapse"
+        onclick="toggleList('introduction-container')"
+        id='introduction-container'>
         <div class="header">
           <h6>Introduction</h6>
           <i class="fa-solid <%= 'fa-chevron-right' || 'fa-chevron-down' %>"></i>
         </div>
-        <div style="display: none">
-          <% table[:introduction].each do |section| %>
-            <%= link_to book_section_path(@book, section[:id]) do %>
+      </div>
+      <div class="<%= collapse_segment(table[:introduction], current_section) %>" id="intro-collapse">
+        <% table[:introduction].each do |section| %>
+          <%= link_to book_section_path(@book, section[:id]), class: 'text-decoration-none' do %>
+            <div class="sub-section <%= current_section.id == section[:id] && 'current-section' %>">
               <p><%= section[:title] %></p>
+            </div>
+          <% end %>
+        <% end %>
+      </div>
+    <% end %>
+
+    <%# PARTS %>
+    <% if table[:parts].length > 0 %>
+      <% table[:parts].each_with_index do |part, index| %>
+        <div
+          class="section"
+          data-bs-toggle="collapse"
+          data-bs-target="#part-collapse-<%= index %>"
+          onclick="toggleList('collapse-container-<%= index %>')"
+          id='collapse-container-<%= index %>'>
+          <div class="header">
+            <h6><%= part[:icon] %>&nbsp&nbsp<%= part[:title] %></h6>
+            <i class="fa-solid <%= 'fa-chevron-right' || 'fa-chevron-down' %>"></i>
+          </div>
+        </div>
+
+
+        <div class="<%= collapse_part(current_section, part, table[:parts][index + 1]) %>"
+             id="part-collapse-<%= index %>">
+          <% table[:sections].each do |section| %>
+            <% if section_within_part?(section, part, table[:parts][index + 1]) %>
+              <%= link_to book_section_path(@book, section[:id]), class: 'text-decoration-none' do %>
+                <div class="sub-section <%= current_section.id == section[:id] && 'current-section' %>">
+                  <p><%= section[:title] %></p>
+                </div>
+              <% end %>
             <% end %>
           <% end %>
         </div>
       <% end %>
-    </div>
-
-    <%# PARTS %>
-    <% table[:parts].each do |part| %>
-      <div class="section">
-        <div class="header">
-          <h6><%= part[:title] %></h6>
-          <i class="fa-solid <%= 'fa-chevron-right' || 'fa-chevron-down' %>"></i>
-        </div>
-        <div style="display: none">
-          <% table[:introduction].each do |section| %>
-            <%= link_to book_section_path(@book, section[:id]) do %>
-              <p><%= section[:title] %></p>
-            <% end %>
-          <% end %>
-        </div>
-      </div>
     <% end %>
 
     <%# Conclusion %>
-    <div class="section">
-      <% if true %>
+    <% if table[:conclusion].length > 0 %>
+      <div class="section"
+           data-bs-toggle="collapse"
+           data-bs-target="#conclusion-collapse"
+           onclick="toggleList('conclusion-container')"
+           id='conclusion-container'>
         <div class="header">
           <h6>Conclusion</h6>
           <i class="fa-solid <%= 'fa-chevron-right' || 'fa-chevron-down' %>"></i>
         </div>
-      <% end %>
-    </div>
-    <% @book.table_of_contents.each do |segment| %>
-      <% unless segment[:title].empty? %>
-        <%= link_to book_section_path(@book, segment[:id]), class: "text-decoration-none" do %>
-          <% current = segment[:id] == current_section.id %>
-          <div class="section <%= current && "current-section" %>">
-            <h6 class="<%= (segment[:title].upcase.include? 'PART') && 'fw-bold lead' %>">
-              <%= segment[:title] %>
-            </h6>
-          </div>
+      </div>
+      <div class="<%= collapse_segment(table[:conclusion], current_section) %>" id="conclusion-collapse">
+        <% table[:conclusion].each do |section| %>
+          <%= link_to book_section_path(@book, section[:id]), class: 'text-decoration-none' do %>
+            <div class="sub-section <%= current_section.id == section[:id] && 'current-section' %>">
+              <p><%= section[:title] %></p>
+            </div>
+          <% end %>
         <% end %>
-      <% end %>
+      </div>
     <% end %>
+    <br/>
   </div>
-  <br/>
 </div>
+
+<script>
+    function toggleList(id) {
+        let icon = document.getElementById(id).getElementsByTagName('i')[0]
+
+        icon.classList.toggle('fa-chevron-right')
+        icon.classList.toggle('fa-chevron-down')
+    }
+
+</script>

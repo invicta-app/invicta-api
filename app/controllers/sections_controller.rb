@@ -29,7 +29,6 @@ class SectionsController < ApplicationController
 
   def fetch_section
     @section = BookSection.find_by(id: params[:id], book_id: params[:book_id])
-    Rails.logger.info("HELLOE BITCH #{params}")
   end
 
   def find_or_create_metadata

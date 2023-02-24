@@ -28,6 +28,7 @@ class BookSection < ApplicationRecord
   has_many :book_contents, class_name: BookContent.name, dependent: :destroy
   enum section_type: {
     introduction: 'introduction',
+    conclusion:   'conclusion',
     part:         'part',
     chapter:      'chapter',
     info:         'info'
