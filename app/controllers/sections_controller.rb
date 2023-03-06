@@ -11,7 +11,7 @@ class SectionsController < ApplicationController
     content     = params[:content]
     end_content = params[:end_content] || params[:content]
 
-    @contents  = BookContent.where(book_section_id: @section.id)
+    @contents  = BookContent.where(book_section_id: @section.id).sort_by(&:sequence)
     @contents  = @contents.where(sequence: content..end_content) if content.present?
     @bookmarks = @section.get_bookmarks(current_user) if current_user
   end

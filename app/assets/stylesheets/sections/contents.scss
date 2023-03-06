@@ -8,7 +8,7 @@
   transition: 0.15s;
   color: $invicta-text !important;
 
-  &:hover { background: $invicta-grey }
+  &:hover { background: $invicta-shade }
 
   p {
     margin-bottom: 0;
@@ -29,6 +29,10 @@
       line-height: 1.6;
     }
   }
+}
+
+.hide-content {
+  display: none;
 }
 
 .capitalized {
