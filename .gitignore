@@ -40,3 +40,4 @@
 !/public/fonts/.keep
 
 /app/assets/font-awesome
+.env
