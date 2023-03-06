@@ -9,14 +9,13 @@ module BookHelper
     markdown.render(text)
   end
 
-  def disable_actions?(content)
+  def actions_disabled?(content)
     return true if (content.text == content.text.upcase) && content.text.length < 55
     false
   end
 
-  def collapse?(content)
-    return false if disable_actions? content
-    return true if content.bookmark_count == 0 # TODO - Algorithm
+  def bookmarked?(content)
+    return true if content.bookmark_count > 0
     false
   end
 end

@@ -1,7 +1,15 @@
 <div class="book-content-actions-container">
-  <div class="comment-wrapper">
+  <div class="actions-wrapper">
     <% unless disabled %>
-      <i class="fa-regular fa-comment fa-lg comment-icon"></i>
+      <div class="dropdown">
+        <div class="ellipsis-container" data-bs-toggle="dropdown">
+          <i class="fa-solid fa-ellipsis fa-lg comment-icon"></i>
+        </div>
+        <ul class="dropdown-menu dropdown-menu-dark">
+          <li class="dropdown-item">Share coming soon...</li>
+          <li class="dropdown-item">Report grammar...</li>
+        </ul>
+      </div>
     <% end %>
   </div>
 </div>

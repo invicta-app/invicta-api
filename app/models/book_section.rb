@@ -69,5 +69,9 @@ class BookSection < ApplicationRecord
     metadata.content_bookmarks
   end
 
+  def total_bookmarks
+    self.book_contents.pluck(:bookmark_count).sum
+  end
+
   # TODO - delete section method
 end
