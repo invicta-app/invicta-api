@@ -44,13 +44,24 @@ module TableOfContentsHelper
     segment.pluck(:id).include? section.id
   end
 
-  def collapse_segment(segment, section)
+  def collapse_segment?(segment, section)
     'collapse' unless segment.pluck(:id).include? section.id
   end
 
   def collapse_part(section, part, next_part)
     next_sequence = next_part && next_part[:sequence] || Float::INFINITY
     'collapse' unless (section.sequence > part[:sequence]) && (section.sequence) <= next_sequence
+  end
+
+  def not_formatted(formatted_table)
+    if formatted_table[:introduction].length == 0 &&
+      formatted_table[:conclusion].length == 0 &&
+      formatted_table[:info].length == 0 &&
+      formatted_table[:parts].length == 0
+      true
+    else
+      false
+    end
   end
 
 end

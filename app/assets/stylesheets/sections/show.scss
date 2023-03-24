@@ -105,11 +105,38 @@
   display: none;
 }
 
-// deprecate?
 .collapsed-content-container {
   width: 100%;
   color: $invicta-light-grey !important;
   overflow: hidden;
+  position: relative;
+
+  .vl-spacer {
+    margin-right: 60px;
+  }
+
+  .vl-container {
+    position: absolute;
+    left: 50px;
+    top: 0;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .vl {
+    border-left: 5px solid $invicta-grey;
+    border-radius: 99px;
+    box-shadow: rgba(0, 0, 0, 0.15) -1px 2px 4px;
+    height: 100%;
+    margin: 40px 0;
+  }
+}
+
+.collapsed-content-hidden {
+  display: none;
 }
 
 .collapse-actions-container {

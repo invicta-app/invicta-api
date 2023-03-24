@@ -15,6 +15,7 @@ module BookHelper
   end
 
   def bookmarked?(content)
+    return false unless content&.bookmark_count.present? # as if bookmarked
     return true if content.bookmark_count > 0
     false
   end

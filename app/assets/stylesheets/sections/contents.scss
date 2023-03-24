@@ -7,8 +7,13 @@
   padding: 0.5em 0;
   transition: 0.15s;
   color: $invicta-text !important;
-
-  &:hover { background: $invicta-shade }
+  height: 100%;
+  overflow: hidden;
+  position: relative;
+  //border: solid $invicta-grey;
+  &:hover .bookmark-wrapper {
+    color: $invicta-theme;
+  }
 
   p {
     margin-bottom: 0;
@@ -22,6 +27,7 @@
 
   .book-content-text-container {
     flex-grow: 100;
+    width: 100%;
     color: $invicta-text !important;
 
     p {
@@ -45,3 +51,4 @@
     padding-bottom: 0.3em;
   }
 }
+

@@ -24,7 +24,7 @@
     <div class="book-section-body mb-3">
       <% if @section.total_bookmarks < 5 %>
         <% @contents.each_with_index do |content, index| %>
-          <%= render partial: 'content', locals: { content: content, index: index } %>
+          <%= render partial: 'content', locals: { content: content, index: index, hidden: false } %>
         <% end %>
 
       <% else %>
@@ -40,21 +40,26 @@
 
           <% else %>
             <% if bookmarked? @contents[index + 1] %>
-              <div id="collapsed-container-<%= index %>" class="collapsed-content-container">
+              <div id="collapsed-container-<%= index %>" class="collapsed-content-container collapsed-content-hidden">
                 <% collapsed.push content %>
-                <% collapsed.each do |collapsed_content| %>
-                  <%= render partial: 'content',
-                             locals:  { content: collapsed_content, index: index, hidden: true } %>
-                <% end %>
-                <% collapsed = [] %>
+                <div>
+                  <hr class="my-3"/>
+                  <div class="vl-container">
+                    <div class="vl"></div>
+                  </div>
+                  <% collapsed.each do |collapsed_content| %>
+                    <%= render partial: 'content',
+                               locals:  { content: collapsed_content, index: index, hidden: true } %>
+                  <% end %>
+                  <% collapsed = [] %>
+                  <hr/>
+                </div>
               </div>
 
-              <div id="collapse-actions-container-<%= index %>" class="collapse-actions-container my-2">
-                <hr/>
+              <div id="collapse-actions-container-<%= index %>" class="collapse-actions-container my-3">
                 <div class="icon-container mx-2" onclick="uncollapse(<%= index %>)">
                   <i class="fa-solid fa-up-down fa-sm"></i>
                 </div>
-                <hr/>
               </div>
             <% else %>
               <% collapsed.push content %>
@@ -119,21 +124,25 @@
     function uncollapse(index) {
         let container = document.getElementById(`collapsed-container-${index}`)
         let actions = document.getElementById(`collapse-actions-container-${index}`)
-
         let contents = container.querySelectorAll('.book-page-content-container')
 
         let show = []
-        console.log('beginning loop:', contents[0].classList.contains('hide-content'))
+
+        if (container.classList.contains('collapsed-content-hidden')) {
+            container.classList.remove('collapsed-content-hidden')
+        }
 
         for (let i = 0; i < contents.length; i++) {
-            if (!contents[i].classList.contains('hide-content')) continue;
-
-            console.log('iteration')
+            if (!contents[i].classList.contains('hide-content')) {
+                if (i === contents.length - 1) actions.style.display = 'none'
+                continue;
+            } // if not hidden
 
             show.push(contents[i])
 
             if (i === contents.length - 1) {
                 for (let j = 0; j < show.length; j++) show[j].classList.remove('hide-content')
+                actions.style.display = 'none'
                 return;
             }
 
@@ -145,15 +154,6 @@
             }
         }
 
-
-        // make parent div visible
-        // individually hide children
-        // get first 3 hidden child nodes & show
-        // or get next 3 hidden child nodes & show
-        // or show remaining nodess
-
-        // container.style.height = '100%'
-        // container.style.maxHeight = '1000em'
         actions.style.display = 'none'
     }
 </script>

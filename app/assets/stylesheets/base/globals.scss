@@ -1,7 +1,7 @@
 // Colors
 $invicta-white: #eaeaea;
 $invicta-text: #e6e6e3;
-$invicta-text-mute: rgb(173, 173, 173);
+$invicta-text-mute: rgb(162, 162, 162);
 $invicta-contrast: #5AB1BB;
 $invicta-theme: #DF9216;
 $invicta-theme-dark: #d18915;
@@ -9,6 +9,7 @@ $invicta-light: #5C5C5C;
 $invicta-light-grey: #494542;
 $invicta-grey: #333333;
 $invicta-dark: #292929;
+$invicta-dark-shade: #272727;
 $invicta-shade: #1F1F1F;
 $invicta-black: #141414;
 // Font sizes
@@ -48,7 +49,19 @@ html {
 
 .invicta-dark-grey { background-color: $invicta-shade }
 
+.invicta-grey-bg { background-color: $invicta-grey }
+
+.invicta-dark-bg { background-color: $invicta-dark }
+
+.invicta-shade-bg { background-color: $invicta-shade }
+
 .invicta-text { color: $invicta-text !important }
+
+.invicta-text-mute { color: $invicta-text-mute !important }
+
+.invicta-dark { color: $invicta-dark }
+
+.invicta-light-grey { color: $invicta-light-grey}
 
 input, textarea {
   background-color: $invicta-black !important;

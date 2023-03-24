@@ -1,4 +1,7 @@
-<div class="book-page-content-container <%= hidden && 'hide-content' %> my-1">
+<div class="book-page-content-container <%= hidden ? 'hide-content invicta-text-mute custom-shit' : 'my-1' %>">
+  <% if hidden %>
+    <div class="vl-spacer"></div>
+  <% end %>
   <%= link_to content_handle_bookmark_path(content), remote: true, class: "text-decoration-none" do %>
     <%= render partial: 'bookmark',
                locals:  {
