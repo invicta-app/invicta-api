@@ -33,7 +33,7 @@
           id="info-container">
           <div class="header">
             <h6>Info</h6>
-            <i class="fa-solid fa-chevron-right"></i>
+            <i class="fa-solid <%= collapse_segment?(table[:info], current_section) ? 'fa-chevron-right' : 'fa-chevron-down' %>"></i>
           </div>
         </div>
         <div class="<%= collapse_segment?(table[:info], current_section) %>" id="info-collapse">
@@ -57,7 +57,7 @@
           id='introduction-container'>
           <div class="header">
             <h6>Introduction</h6>
-            <i class="fa-solid <%= 'fa-chevron-right' || 'fa-chevron-down' %>"></i>
+            <i class="fa-solid <%= collapse_segment?(table[:introduction], current_section) ? 'fa-chevron-right' : 'fa-chevron-down' %>"></i>
           </div>
         </div>
         <div class="<%= collapse_segment?(table[:introduction], current_section) %>" id="intro-collapse">
@@ -82,7 +82,7 @@
             id='collapse-container-<%= index %>'>
             <div class="header">
               <h6><%= part[:icon] %>&nbsp&nbsp<%= part[:title] %></h6>
-              <i class="fa-solid <%= 'fa-chevron-right' || 'fa-chevron-down' %>"></i>
+              <i class="fa-solid <%= section_within_part?(current_section, part, table[:parts][index + 1]) ? 'fa-chevron-down' : 'fa-chevron-right' %>"></i>
             </div>
           </div>
 
@@ -111,7 +111,7 @@
              id='conclusion-container'>
           <div class="header">
             <h6>Conclusion</h6>
-            <i class="fa-solid <%= 'fa-chevron-right' || 'fa-chevron-down' %>"></i>
+            <i class="fa-solid <%= collapse_segment?(table[:conclusion], current_section) ? 'fa-chevron-right' : 'fa-chevron-down' %>"></i>
           </div>
         </div>
         <div class="<%= collapse_segment?(table[:conclusion], current_section) %>" id="conclusion-collapse">
