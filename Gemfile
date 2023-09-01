@@ -1,6 +1,8 @@
 source "https://rubygems.org"
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
+# Random comment
+
 ruby "3.1.3"
 
 gem "sassc-rails", "~> 2.1.2"
